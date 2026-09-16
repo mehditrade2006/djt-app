@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DJT</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+/* =====================================================
+   🌐 پایه
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg-1: #0a0e1a;
+  --bg-2: #121829;
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --accent: #10b981;
+  --accent-2: #06b6d4;
+  --danger: #ef4444;
+  --profit: #10b981;
+  --loss: #ef4444;
+  --warning: #f59e0b;
+}
+
+[data-theme="light"] {
+  --bg-1: #e0e7ff;
+  --bg-2: #f0f9ff;
+  --text: #0f172a;
+  --text-dim: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-shadow: 0 8px 32px rgba(100, 116, 139, 0.2);
+  --accent: #059669;
+  --accent-2: #0891b2;
+  --danger: #dc2626;
+  --profit: #059669;
+  --loss: #dc2626;
+  --warning: #d97706;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--bg-1);
+  overflow-x: hidden;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* =====================================================
+   🌊 پس‌زمینه متحرک
+   ===================================================== */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: float 20s infinite ease-in-out;
+}
+
+.blob-1 { width: 400px; height: 400px; background: var(--accent); top: -150px; right: -150px; }
+.blob-2 { width: 350px; height: 350px; background: var(--accent-2); bottom: -150px; left: -150px; animation-delay: -7s; }
+.blob-3 { width: 300px; height: 300px; background: #8b5cf6; top: 40%; left: 40%; animation-delay: -14s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -80px) scale(1.1); }
+  66% { transform: translate(-50px, 50px) scale(0.95); }
+}
+
+/* =====================================================
+   💎 کارت شیشه‌ای
+   ===================================================== */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--glass-shadow);
+  padding: 24px;
+}
+
+/* =====================================================
+   🎬 صفحه Splash
+   ===================================================== */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background: linear-gradient(135deg, #0a0e1a, #121829);
+  transition: opacity 0.6s ease;
+}
+
+.splash-logo {
+  width: 140px;
+  height: 140px;
+  animation: logoIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes logoIn {
+  from { opacity: 0; transform: scale(0.5) rotate(-20deg); filter: blur(20px); }
+  to { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+}
+
+.splash-title {
+  margin-top: 20px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  direction: ltr;
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeIn 1s 0.5s both;
+}
+
+.splash-sub {
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  animation: fadeIn 1s 0.8s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   👋 صفحه Welcome
+   ===================================================== */
+.welcome-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.welcome-card {
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.welcome-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+}
+
+.welcome-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  direction: ltr;
+}
+
+.welcome-title .djt {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-title .journal {
+  color: var(--text);
+  font-weight: 300;
+}
+
+.welcome-sub {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+.user-greeting {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--accent);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+/* دکمه‌ها */
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+}
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-danger {
+  width: 100%;
+  padding: 12px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  color: var(--danger);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-gold {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
+  border: none;
+  border-radius: 14px;
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+}
+
+.icon-btn {
+  width: 42px; height: 42px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =====================================================
+   🏠 صفحه اصلی (منو)
+   ===================================================== */
+.main-menu {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  animation: fadeIn 0.6s both;
+}
+
+.menu-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-header-logo img {
+  width: 42px;
+  height: 42px;
+}
+
+.menu-header-logo .text {
+  font-size: 1.2rem;
+  font-weight: 800;
+  direction: ltr;
+}
+
+.menu-header-logo .text .djt {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-header-logo .text .journal {
+  color: var(--text);
+  font-weight: 300;
+}
+
+.menu-welcome {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: fadeIn 0.6s 0.1s both;
+}
+
+.menu-welcome h2 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.menu-welcome p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  animation: fadeIn 0.6s 0.2s both;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.menu-item:active::before { opacity: 1; }
+.menu-item:active { transform: scale(0.98); }
+
+.menu-item-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.menu-item-icon.journal {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+}
+
+.menu-item-icon.education {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+}
+
+.menu-item-icon.analysis {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+}
+
+.menu-item-icon.mentor {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(245, 158, 11, 0.2));
+}
+
+.menu-item-text {
+  flex: 1;
+  text-align: right;
+}
+
+.menu-item-text h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.menu-item-text p {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.menu-item-arrow {
+  color: var(--text-dim);
+  font-size: 1.3rem;
+}
+
+/* فوتر منو */
+.menu-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  animation: fadeIn 0.6s 0.4s both;
+}
+
+.menu-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.menu-footer a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.menu-footer svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* =====================================================
+   📄 صفحه‌های داخلی
+   ===================================================== */
+.page {
+  min-height: 100vh;
+  padding: 16px;
+  animation: fadeIn 0.4s both;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =====================================================
+   📝 ورودی‌ها
+   ===================================================== */
+.input-group { text-align: right; margin-bottom: 16px; }
+
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  border-color: var(--accent);
+}
+
+.input-group input[type="number"],
+.input-group input[type="datetime-local"],
+.input-group input[type="date"],
+.input-group input#symbol { direction: ltr; text-align: left; }
+
+.input-group select option { background: var(--bg-1); color: var(--text); }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+/* =====================================================
+   📸 Drag & Drop
+   ===================================================== */
+.drop-zone {
+  border: 2px dashed var(--glass-border);
+  border-radius: 14px;
+  padding: 22px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--glass-bg);
+}
+.drop-zone:active, .drop-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.08);
+}
+.drop-icon { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+.drop-zone p { color: var(--text-dim); font-size: 0.8rem; }
+
+.image-preview {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.image-preview img {
+  width: 70px; height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--glass-border);
+}
+
+/* =====================================================
+   📊 جدول
+   ===================================================== */
+.table-wrapper { overflow-x: auto; border-radius: 12px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+
+table th {
+  padding: 10px;
+  text-align: right;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--glass-border);
+  white-space: nowrap;
+}
+
+table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+tr.incomplete-row { opacity: 0.65; }
+
+.profit { color: var(--profit); font-weight: 700; direction: ltr; }
+.loss { color: var(--loss); font-weight: 700; direction: ltr; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.badge-buy { background: rgba(16,185,129,0.2); color: var(--profit); }
+.badge-sell { background: rgba(239,68,68,0.2); color: var(--loss); }
+.badge-incomplete { background: rgba(245, 158, 11, 0.2); color: var(--warning); margin-right: 4px; }
+
+.thumb {
+  width: 36px; height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.action-btn {
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  border: 1px solid;
+  margin: 0 1px;
+}
+.action-btn.edit {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.action-btn.delete {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* =====================================================
+   📈 گراف
+   ===================================================== */
+.chart-wrapper { width: 100%; height: 220px; position: relative; }
+.chart-wrapper svg { width: 100%; height: 100%; }
+
+/* =====================================================
+   🪟 مودال
+   ===================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.3s both;
+}
+
+.modal-card {
+  max-width: 400px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: cardIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+/* =====================================================
+   📄 جزئیات
+   ===================================================== */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 0.85rem;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: var(--text-dim); font-weight: 600; }
+.detail-value {
+  color: var(--text);
+  text-align: left;
+  direction: ltr;
+  max-width: 60%;
+  word-break: break-word;
+}
+.detail-value.rtl-text { direction: rtl; text-align: right; }
+.detail-value.profit { color: var(--profit); font-weight: 700; }
+.detail-value.loss { color: var(--loss); font-weight: 700; }
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.edit-actions button { margin: 0; }
+
+/* =====================================================
+   📤 اشتراک‌گذاری
+   ===================================================== */
+.range-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.range-btn {
+  padding: 14px;
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+.range-btn.active {
+  border-color: #d4af37;
+  background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(245,215,110,0.1));
+}
+.range-icon { font-size: 1.4rem; }
+
+.size-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.size-btn {
+  padding: 10px 6px;
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.size-btn.active {
+  border-color: #d4af37;
+  background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(245,215,110,0.1));
+}
+.size-icon { font-size: 1.2rem; }
+
+/* =====================================================
+   🖼 کارت اشتراک‌گذاری
+   ===================================================== */
+.share-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.share-card {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  border: 2px solid #d4af37;
+  border-radius: 24px;
+  padding: 36px 26px;
+  color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+}
+
+.share-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+  animation: goldShine 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes goldShine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.share-card-inner { position: relative; z-index: 1; }
+
+.share-logo {
+  text-align: center;
+  margin-bottom: 20px;
+  direction: ltr;
+}
+
+.share-logo .djt {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
+}
+
+.share-logo .journal {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: #d4af37;
+  display: block;
+  margin-top: 4px;
+}
+
+.share-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 16px 0;
+}
+
+.share-range-label {
+  text-align: center;
+  color: #999;
+  font-size: 0.8rem;
+  margin-bottom: 16px;
+  direction: ltr;
+}
+
+.share-chart {
+  background: rgba(212, 175, 55, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.share-chart svg { width: 100%; height: auto; display: block; }
+
+.share-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.share-stat {
+  text-align: center;
+  padding: 12px 6px;
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 12px;
+}
+
+.share-stat-label {
+  color: #999;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+
+.share-stat-value {
+  color: #d4af37;
+  font-size: 1.15rem;
+  font-weight: 800;
+  direction: ltr;
+}
+
+.share-stat-value.profit { color: #4ade80; }
+.share-stat-value.loss { color: #f87171; }
+
+.share-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.share-social {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #d4af37;
+  font-size: 0.75rem;
+  direction: ltr;
+}
+
+.share-social svg {
+  width: 16px;
+  height: 16px;
+  fill: #d4af37;
+}
+
+/* =====================================================
+   🎥 آموزش‌ها
+   ===================================================== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-dim);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 0.85rem;
+}
+
+/* تحلیل‌ها */
+.analysis-card {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.analysis-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.analysis-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.analysis-card p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.analysis-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #0088cc, #229ED9);
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
+  transition: all 0.3s ease;
+}
+
+.analysis-btn:hover { transform: translateY(-2px); }
+
+.analysis-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+/* فرم منتور */
+.mentor-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.success-message {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+/* =====================================================
+   🛠 کمکی
+   ===================================================== */
+.hidden { display: none !important; }
+
+@media (max-width: 600px) {
+  .glass-card { padding: 18px; }
+  .page { padding: 12px; }
+  .menu-item { padding: 18px 16px; }
+  .menu-item-icon { width: 46px; height: 46px; font-size: 1.4rem; }
+  .share-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- پس‌زمینه متحرک -->
+<div class="animated-bg">
+  <span class="blob blob-1"></span>
+  <span class="blob blob-2"></span>
+  <span class="blob blob-3"></span>
+</div>
+
+<!-- ==================== صفحه Splash ==================== -->
+<section id="splash-screen" class="splash-screen">
+  <svg class="splash-logo" viewBox="0 0 200 200">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#10b981"/>
+        <stop offset="100%" stop-color="#06b6d4"/>
+      </linearGradient>
+      <radialGradient id="grad2" cx="50%" cy="50%">
+        <stop offset="0%" stop-color="#1a1a1a"/>
+        <stop offset="100%" stop-color="#0a0a0a"/>
+      </radialGradient>
+    </defs>
+    <circle cx="100" cy="100" r="95" fill="url(#grad2)" stroke="url(#grad1)" stroke-width="3"/>
+    <circle cx="100" cy="100" r="82" fill="none" stroke="#ef4444" stroke-width="1.5" opacity="0.7"/>
+    <path d="M 45 65 Q 55 100 45 135 Q 65 115 70 100 Q 65 85 45 65 Z" fill="#ef4444" opacity="0.85"/>
+    <path d="M 155 65 Q 145 100 155 135 Q 135 115 130 100 Q 135 85 155 65 Z" fill="#ef4444" opacity="0.85"/>
+    <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#ffffff" letter-spacing="2">DJT</text>
+  </svg>
+  <div class="splash-title">DJT</div>
+  <div class="splash-sub">Trading Community</div>
+</section>
+
+<!-- ==================== صفحه Welcome ==================== -->
+<section id="welcome-screen" class="welcome-screen hidden">
+  <div class="glass-card welcome-card">
+    <svg class="welcome-logo" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="wgrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#10b981"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+        <radialGradient id="wgrad2" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#1a1a1a"/>
+          <stop offset="100%" stop-color="#0a0a0a"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="95" fill="url(#wgrad2)" stroke="url(#wgrad1)" stroke-width="3"/>
+      <circle cx="100" cy="100" r="82" fill="none" stroke="#ef4444" stroke-width="1.5" opacity="0.7"/>
+      <path d="M 45 65 Q 55 100 45 135 Q 65 115 70 100 Q 65 85 45 65 Z" fill="#ef4444" opacity="0.85"/>
+      <path d="M 155 65 Q 145 100 155 135 Q 135 115 130 100 Q 135 85 155 65 Z" fill="#ef4444" opacity="0.85"/>
+      <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#ffffff" letter-spacing="2">DJT</text>
+    </svg>
+
+    <h1 class="welcome-title">
+      <span class="djt">DJT</span>
+      <span class="journal">Journal</span>
+    </h1>
+    <p class="welcome-sub">
+      به جمع تریدرهای حرفه‌ای خوش آمدید ✨<br>
+      ژورنال، آموزش‌ها و تحلیل‌های اختصاصی
+    </p>
+
+    <div class="user-greeting" id="user-greeting"></div>
+
+    <button id="start-btn" class="btn-primary">🚀 شروع کنید</button>
+  </div>
+</section>
+
+<!-- ==================== صفحه اصلی (منو) ==================== -->
+<section id="main-menu" class="main-menu hidden">
+  <div class="menu-header">
+    <div class="menu-header-logo">
+      <svg viewBox="0 0 200 200" style="width:42px;height:42px;">
+        <defs>
+          <linearGradient id="hgrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#06b6d4"/>
+          </linearGradient>
+          <radialGradient id="hgrad2" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#0a0a0a"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="95" fill="url(#hgrad2)" stroke="url(#hgrad1)" stroke-width="4"/>
+        <text x="100" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#ffffff">DJT</text>
+      </svg>
+      <div class="text">
+        <span class="djt">DJT</span>
+        <span class="journal">Journal</span>
+      </div>
+    </div>
+    <button id="menu-settings-btn" class="icon-btn" title="تنظیمات">⚙️</button>
+  </div>
+
+  <div class="menu-welcome">
+    <h2>سلام <span id="menu-username">دوست عزیز</span> 👋</h2>
+    <p>چی می‌خوای امروز انجام بدی؟</p>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-item" onclick="openPage('journal')">
+      <div class="menu-item-icon journal">📓</div>
+      <div class="menu-item-text">
+        <h3>ژورنال معاملاتی</h3>
+        <p>ثبت، تحلیل و پیگیری معاملات</p>
+      </div>
+      <div class="menu-item-arrow">‹</div>
+    </div>
+
+    <div class="menu-item" onclick="openPage('education')">
+      <div class="menu-item-icon education">🎥</div>
+      <div class="menu-item-text">
+        <h3>آموزش‌ها</h3>
+        <p>ویدیوهای آموزشی ترید</p>
+      </div>
+      <div class="menu-item-arrow">‹</div>
+    </div>
+
+    <div class="menu-item" onclick="openPage('analysis')">
+      <div class="menu-item-icon analysis">📊</div>
+      <div class="menu-item-text">
+        <h3>تحلیل‌ها</h3>
+        <p>آخرین تحلیل‌های کانال</p>
+      </div>
+      <div class="menu-item-arrow">‹</div>
+    </div>
+
+    <div class="menu-item" onclick="openPage('mentor')">
+      <div class="menu-item-icon mentor">🧑‍🏫</div>
+      <div class="menu-item-text">
+        <h3>ثبت‌نام منتور</h3>
+        <p>به تیم DJT بپیوند</p>
+      </div>
+      <div class="menu-item-arrow">‹</div>
+    </div>
+  </div>
+
+  <div class="menu-footer">
+    <a href="https://www.instagram.com/dowjones__trading?stkn=dzdxdHo5N250M2Ni" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 100 13.2 6.6 6.6 0 000-13.2zm0 10.9a4.3 4.3 0 110-8.6 4.3 4.3 0 010 8.6zm6.9-11.2a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+      <span>Instagram</span>
+    </a>
+    <a href="https://t.me/dowjones_trading" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.1c-.2 1-.8 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L7.6 12.2 3 10.8c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.1 1.8z"/></svg>
+      <span>Telegram</span>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== صفحه ژورنال ==================== -->
+<section id="page-journal" class="page hidden">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">›</button>
+    <h2 class="page-title">📓 ژورنال معاملاتی</h2>
+    <button id="share-btn" class="icon-btn" style="margin-right:auto;" title="اشتراک‌گذاری">📤</button>
+    <button id="theme-toggle" class="icon-btn" title="تغییر تم">🌙</button>
+  </div>
+
+  <!-- ✨ صفحه Welcome داخلی ژورنال -->
+  <div id="journal-welcome" style="max-width:420px;margin:40px auto;">
+    <div class="glass-card" style="text-align:center;">
+      <h2 style="font-size:1.6rem;font-weight:800;margin-bottom:8px;direction:ltr;">
+        <span style="background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">DJT</span>
+        <span style="color:var(--text);font-weight:300;">JOURNAL</span>
+      </h2>
+      <p style="color:var(--text-dim);font-size:0.9rem;margin-bottom:24px;line-height:1.7;">
+        به ژورنال معاملاتی خوش آمدید ✨<br>
+        برای شروع، موجودی اولیه‌ت رو وارد کن
+      </p>
+
+      <div class="input-group" style="text-align:right;">
+        <label for="journal-initial-balance">موجودی اولیه حساب (USD)</label>
+        <input type="number" id="journal-initial-balance" placeholder="1000" min="0" step="0.01">
+      </div>
+
+      <button id="journal-start-btn" class="btn-primary">ورود به ژورنال 🚀</button>
+    </div>
+  </div>
+
+  <!-- محتوای اصلی ژورنال -->
+  <div id="journal-content" class="page-content hidden">
+
+    <div class="glass-card">
+      <h2 class="section-title">📊 خلاصه حساب</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;">
+        <div style="text-align:center;padding:14px;background:var(--glass-bg);border-radius:12px;">
+          <div style="color:var(--text-dim);font-size:0.75rem;margin-bottom:4px;">موجودی</div>
+          <div id="stat-balance" style="font-size:1.3rem;font-weight:800;direction:ltr;">$0</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--glass-bg);border-radius:12px;">
+          <div style="color:var(--text-dim);font-size:0.75rem;margin-bottom:4px;">سود/ضرر</div>
+          <div id="stat-total-pnl" style="font-size:1.3rem;font-weight:800;direction:ltr;">$0</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--glass-bg);border-radius:12px;">
+          <div style="color:var(--text-dim);font-size:0.75rem;margin-bottom:4px;">Win Rate</div>
+          <div id="stat-winrate" style="font-size:1.3rem;font-weight:800;">0%</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--glass-bg);border-radius:12px;">
+          <div style="color:var(--text-dim);font-size:0.75rem;margin-bottom:4px;">معاملات</div>
+          <div id="stat-count" style="font-size:1.3rem;font-weight:800;">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h2 class="section-title">➕ ثبت معامله جدید</h2>
+      <form id="trade-form">
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="symbol">نماد</label>
+            <input type="text" id="symbol" placeholder="EURUSD">
+          </div>
+          <div class="input-group">
+            <label for="direction">جهت</label>
+            <select id="direction">
+              <option value="">انتخاب</option>
+              <option value="buy">Buy 🟢</option>
+              <option value="sell">Sell 🔴</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="entry-date">ورود</label>
+            <input type="datetime-local" id="entry-date">
+          </div>
+          <div class="input-group">
+            <label for="exit-date">خروج</label>
+            <input type="datetime-local" id="exit-date">
+          </div>
+          <div class="input-group">
+            <label for="lot">لاتیج</label>
+            <input type="number" id="lot" step="0.01" min="0" placeholder="0.1">
+          </div>
+          <div class="input-group">
+            <label for="pnl">سود / ضرر ($)</label>
+            <input type="number" id="pnl" step="0.01" placeholder="50 یا -30">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="entry-reason">دلیل ورود</label>
+          <textarea id="entry-reason" rows="2" placeholder="چرا وارد شدی؟"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="exit-reason">دلیل خروج</label>
+          <textarea id="exit-reason" rows="2" placeholder="چرا خارج شدی؟"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="note">یادداشت</label>
+          <textarea id="note" rows="2" placeholder="نکات اضافه..."></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>عکس پوزیشن</label>
+          <div id="drop-zone" class="drop-zone">
+            <span class="drop-icon">📸</span>
+            <p>عکس بکش و بذار یا کلیک کن</p>
+            <input type="file" id="position-image" accept="image/*" hidden>
+          </div>
+          <div id="image-preview" class="image-preview"></div>
+        </div>
+
+        <button type="submit" class="btn-primary">ثبت معامله ✅</button>
+      </form>
+    </div>
+
+    <div class="glass-card">
+      <h2 class="section-title">📋 لیست معاملات</h2>
+      <div class="table-wrapper">
+        <table id="trades-table">
+          <thead>
+            <tr>
+              <th>تاریخ</th>
+              <th>نماد</th>
+              <th>جهت</th>
+              <th>لاتیج</th>
+              <th>سود/ضرر</th>
+              <th>بالانس</th>
+              <th>عکس</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <tbody id="trades-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h2 class="section-title">📈 نمودار رشد <span style="font-size:0.7rem;color:var(--text-dim);font-weight:400;">(معاملات کامل)</span></h2>
+      <div class="chart-wrapper">
+        <svg id="growth-chart" viewBox="0 0 800 280" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== صفحه آموزش‌ها ==================== -->
+<section id="page-education" class="page hidden">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">›</button>
+    <h2 class="page-title">🎥 آموزش‌ها</h2>
+  </div>
+
+  <div class="page-content">
+    <div class="glass-card">
+      <div class="empty-state">
+        <div class="empty-state-icon">🎬</div>
+        <h3>به‌زودی...</h3>
+        <p>ویدیوهای آموزشی ترید به‌زودی اینجا قرار می‌گیرن</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== صفحه تحلیل‌ها ==================== -->
+<section id="page-analysis" class="page hidden">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">›</button>
+    <h2 class="page-title">📊 تحلیل‌ها</h2>
+  </div>
+
+  <div class="page-content">
+    <div class="glass-card analysis-card">
+      <div class="analysis-icon">📈</div>
+      <h3>تحلیل‌های اختصاصی DJT</h3>
+      <p>آخرین تحلیل‌های بازار فارکس و کریپتو رو توی کانال تلگرام ما ببین</p>
+
+      <a href="https://t.me/dowjones_trading" target="_blank" rel="noopener" class="analysis-btn">
+        <svg viewBox="0 0 24 24"><path d="M21.9 4.3l-3 14.1c-.2 1-.8 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L7.6 12.2 3 10.8c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.1 1.8z"/></svg>
+        ورود به کانال تلگرام
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== صفحه ثبت‌نام منتور ==================== -->
+<section id="page-mentor" class="page hidden">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBack()">›</button>
+    <h2 class="page-title">🧑‍🏫 ثبت‌نام منتور</h2>
+  </div>
+
+  <div class="page-content">
+    <div class="glass-card">
+      <div id="mentor-success" class="success-message hidden">
+        ✅ ثبت‌نام شما با موفقیت ارسال شد! به‌زودی با شما تماس می‌گیریم.
+      </div>
+
+      <form id="mentor-form" class="mentor-form">
+        <div class="input-group">
+          <label for="mentor-name">نام و نام خانوادگی *</label>
+          <input type="text" id="mentor-name" required>
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-telegram">آیدی تلگرام *</label>
+          <input type="text" id="mentor-telegram" placeholder="@username" required style="direction:ltr;text-align:left;">
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-phone">شماره تماس</label>
+          <input type="tel" id="mentor-phone" placeholder="09xxxxxxxxx" style="direction:ltr;text-align:left;">
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-experience">سابقه‌ی ترید (سال)</label>
+          <input type="number" id="mentor-experience" min="0" placeholder="3">
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-about">درباره‌ی خودت و انگیزه‌ات *</label>
+          <textarea id="mentor-about" placeholder="چرا می‌خوای منتور DJT بشی؟" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">📩 ارسال درخواست</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== مودال تنظیمات ==================== -->
+<div id="settings-modal" class="modal hidden">
+  <div class="glass-card modal-card">
+    <h3>⚙️ تنظیمات</h3>
+
+    <div class="input-group">
+      <label for="settings-balance">موجودی حساب (USD)</label>
+      <input type="number" id="settings-balance" step="0.01" min="0">
+    </div>
+
+    <button id="save-balance-btn" class="btn-primary">💾 ذخیره موجودی</button>
+    <button id="reset-btn" class="btn-danger">🗑 ریست کامل داده‌ها</button>
+    <button id="close-modal-btn" class="btn-secondary">بستن</button>
+  </div>
+</div>
+
+<!-- ==================== لایت‌باکس ==================== -->
+<div id="lightbox" class="modal hidden" style="cursor:zoom-out;">
+  <img id="lightbox-img" style="max-width:90%;max-height:90%;border-radius:16px;" alt="">
+</div>
+
+<!-- ==================== مودال جزئیات معامله ==================== -->
+<div id="trade-detail-modal" class="modal hidden">
+  <div class="glass-card modal-card" onclick="event.stopPropagation()">
+    <h3 id="detail-title" style="margin-bottom:14px;">📄 جزئیات</h3>
+    <div id="detail-content"></div>
+    <div class="edit-actions">
+      <button id="edit-trade-btn" class="btn-primary" style="flex:1;">✏️ ویرایش</button>
+      <button id="close-detail-btn" class="btn-secondary" style="flex:1;margin-top:0;">بستن</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== مودال ویرایش معامله ==================== -->
+<div id="edit-modal" class="modal hidden">
+  <div class="glass-card modal-card" onclick="event.stopPropagation()">
+    <h3 style="margin-bottom:14px;">✏️ ویرایش معامله</h3>
+
+    <div class="form-grid">
+      <div class="input-group">
+        <label for="edit-symbol">نماد</label>
+        <input type="text" id="edit-symbol">
+      </div>
+      <div class="input-group">
+        <label for="edit-direction">جهت</label>
+        <select id="edit-direction">
+          <option value="">انتخاب</option>
+          <option value="buy">Buy</option>
+          <option value="sell">Sell</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="edit-entry-date">ورود</label>
+        <input type="datetime-local" id="edit-entry-date">
+      </div>
+      <div class="input-group">
+        <label for="edit-exit-date">خروج</label>
+        <input type="datetime-local" id="edit-exit-date">
+      </div>
+      <div class="input-group">
+        <label for="edit-lot">لاتیج</label>
+        <input type="number" id="edit-lot" step="0.01">
+      </div>
+      <div class="input-group">
+        <label for="edit-pnl">سود / ضرر</label>
+        <input type="number" id="edit-pnl" step="0.01">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="edit-entry-reason">دلیل ورود</label>
+      <textarea id="edit-entry-reason" rows="2"></textarea>
+    </div>
+
+    <div class="input-group">
+      <label for="edit-exit-reason">دلیل خروج</label>
+      <textarea id="edit-exit-reason" rows="2"></textarea>
+    </div>
+
+    <div class="input-group">
+      <label for="edit-note">یادداشت</label>
+      <textarea id="edit-note" rows="2"></textarea>
+    </div>
+
+    <div class="input-group">
+      <label>عکس پوزیشن</label>
+      <div id="edit-drop-zone" class="drop-zone">
+        <span class="drop-icon">📸</span>
+        <p>عکس جدید بکش و بذار یا کلیک کن (خالی = حفظ عکس قبلی)</p>
+        <input type="file" id="edit-image" accept="image/*" hidden>
+      </div>
+      <div id="edit-image-preview" class="image-preview"></div>
+      <button type="button" id="remove-image-btn" class="btn-danger" style="margin-top:10px;display:none;">🗑 حذف عکس</button>
+    </div>
+
+    <div class="edit-actions">
+      <button id="save-edit-btn" class="btn-primary" style="flex:1;">💾 ذخیره</button>
+      <button id="cancel-edit-btn" class="btn-secondary" style="flex:1;margin-top:0;">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== مودال اشتراک‌گذاری ==================== -->
+<div id="share-modal" class="modal hidden">
+  <div class="glass-card modal-card" style="max-width:460px;" onclick="event.stopPropagation()">
+    <h3>📤 اشتراک‌گذاری</h3>
+
+    <div class="input-group">
+      <label>بازه زمانی</label>
+      <div class="range-options">
+        <button type="button" class="range-btn active" data-range="all">
+          <span class="range-icon">📊</span>
+          <span>کل تایم</span>
+        </button>
+        <button type="button" class="range-btn" data-range="custom">
+          <span class="range-icon">📅</span>
+          <span>محدوده</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="custom-range" class="hidden">
+      <div class="input-group">
+        <label for="share-from">از تاریخ</label>
+        <input type="date" id="share-from">
+      </div>
+      <div class="input-group">
+        <label for="share-to">تا تاریخ</label>
+        <input type="date" id="share-to">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>سایز کارت</label>
+      <div class="size-options">
+        <button type="button" class="size-btn" data-size="square">
+          <span class="size-icon">⬛</span>
+          <span>مربع</span>
+        </button>
+        <button type="button" class="size-btn active" data-size="story">
+          <span class="size-icon">📱</span>
+          <span>استوری</span>
+        </button>
+        <button type="button" class="size-btn" data-size="landscape">
+          <span class="size-icon">🖥</span>
+          <span>افقی</span>
+        </button>
+      </div>
+    </div>
+
+    <button id="generate-share-btn" class="btn-gold">مشاهده و اشتراک‌گذاری ✨</button>
+    <button id="close-share-btn" class="btn-secondary">بستن</button>
+  </div>
+</div>
+
+<!-- ==================== مودال پیش‌نمایش ==================== -->
+<div id="preview-modal" class="modal hidden">
+  <div class="glass-card modal-card" style="max-width:600px;" onclick="event.stopPropagation()">
+    <h3>🖼 پیش‌نمایش کارت</h3>
+    <div class="share-card-wrapper">
+      <div id="share-card-container"></div>
+    </div>
+    <button id="download-share-btn" class="btn-gold" style="margin-top:16px;">📄 ذخیره به PDF</button>
+    <button id="close-preview-btn" class="btn-secondary">بستن</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   🚀 راه‌اندازی Telegram WebApp
+   ===================================================== */
+let tg = null;
+let tgUser = null;
+
+try {
+  if (window.Telegram && window.Telegram.WebApp) {
+    tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+    tgUser = tg.initDataUnsafe?.user || null;
+  }
+} catch (e) {
+  console.warn('Telegram WebApp not available', e);
+}
+
+/* =====================================================
+   💾 مدیریت داده‌ها
+   ===================================================== */
+const STORAGE_KEY_SETTINGS = 'djt_settings';
+const STORAGE_KEY_TRADES = 'djt_trades';
+
+function getSettings() {
+  const s = localStorage.getItem(STORAGE_KEY_SETTINGS);
+  return s ? JSON.parse(s) : null;
+}
+function saveSettings(s) {
+  localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
+}
+function getTrades() {
+  const t = localStorage.getItem(STORAGE_KEY_TRADES);
+  return t ? JSON.parse(t) : [];
+}
+function saveTrades(t) {
+  localStorage.setItem(STORAGE_KEY_TRADES, JSON.stringify(t));
+}
+
+function isTradeComplete(t) {
+  if (!t) return false;
+  const hasSymbol = t.symbol && t.symbol.toString().trim() !== '';
+  const hasPnl = t.pnl !== null && t.pnl !== undefined && t.pnl !== '' && !isNaN(Number(t.pnl));
+  const hasLot = t.lot !== null && t.lot !== undefined && t.lot !== '' && !isNaN(Number(t.lot));
+  return hasSymbol && hasPnl && hasLot;
+}
+
+function getCompleteTrades() {
+  return getTrades().filter(isTradeComplete);
+}
+
+/* =====================================================
+   🎬 Splash → Welcome
+   ===================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+  if (tgUser) {
+    const name = tgUser.first_name || tgUser.username || 'دوست عزیز';
+    document.getElementById('user-greeting').textContent = `👋 سلام ${name}`;
+    document.getElementById('menu-username').textContent = name;
+  } else {
+    document.getElementById('user-greeting').textContent = '👋 سلام، خوش آمدی';
+  }
+
+  setTimeout(() => {
+    const splash = document.getElementById('splash-screen');
+    splash.style.opacity = '0';
+    setTimeout(() => {
+      splash.classList.add('hidden');
+      document.getElementById('welcome-screen').classList.remove('hidden');
+    }, 600);
+  }, 2000);
+});
+
+/* =====================================================
+   🎯 دکمه شروع
+   ===================================================== */
+document.getElementById('start-btn').addEventListener('click', () => {
+  document.getElementById('welcome-screen').classList.add('hidden');
+  document.getElementById('main-menu').classList.remove('hidden');
+});
+
+/* =====================================================
+   🧭 ناوبری
+   ===================================================== */
+let currentPage = null;
+
+function openPage(page) {
+  document.getElementById('main-menu').classList.add('hidden');
+
+  if (page === 'journal') {
+    document.getElementById('page-journal').classList.remove('hidden');
+    currentPage = 'journal';
+    initJournalPage();
+  } else if (page === 'education') {
+    document.getElementById('page-education').classList.remove('hidden');
+    currentPage = 'education';
+  } else if (page === 'analysis') {
+    document.getElementById('page-analysis').classList.remove('hidden');
+    currentPage = 'analysis';
+  } else if (page === 'mentor') {
+    document.getElementById('page-mentor').classList.remove('hidden');
+    currentPage = 'mentor';
+  }
+}
+
+function goBack() {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  document.getElementById('main-menu').classList.remove('hidden');
+  currentPage = null;
+}
+
+if (tg && tg.BackButton) {
+  tg.BackButton.onClick(() => {
+    if (currentPage) goBack();
+  });
+}
+
+/* =====================================================
+   📓 ژورنال
+   ===================================================== */
+function initJournalPage() {
+  let settings = getSettings();
+
+  // اگه کاربر جدید (تنظیمات نداره) → صفحه Welcome ژورنال
+  if (!settings || settings.firstRun !== false) {
+    document.getElementById('journal-welcome').classList.remove('hidden');
+    document.getElementById('journal-content').classList.add('hidden');
+    return;
+  }
+
+  // کاربر قدیمی → مستقیم محتوا
+  document.getElementById('journal-welcome').classList.add('hidden');
+  document.getElementById('journal-content').classList.remove('hidden');
+
+  applyTheme(settings.theme || 'dark');
+
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('entry-date').value = now.toISOString().slice(0, 16);
+
+  renderAll();
+}
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    const tt = document.getElementById('theme-toggle');
+    if (tt) tt.textContent = '☀️';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    const tt = document.getElementById('theme-toggle');
+    if (tt) tt.textContent = '🌙';
+  }
+}
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const settings = getSettings();
+  settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
+  saveSettings(settings);
+  applyTheme(settings.theme);
+});
+
+/* =====================================================
+   🎯 دکمه شروع ژورنال (موجودی اولیه)
+   ===================================================== */
+document.getElementById('journal-start-btn').addEventListener('click', () => {
+  const balanceInput = document.getElementById('journal-initial-balance');
+  const balance = parseFloat(balanceInput.value);
+
+  if (isNaN(balance) || balance <= 0) {
+    balanceInput.style.borderColor = 'var(--danger)';
+    balanceInput.focus();
+    balanceInput.placeholder = 'یه عدد معتبر وارد کن';
+    balanceInput.animate(
+      [
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(-8px)' },
+        { transform: 'translateX(8px)' },
+        { transform: 'translateX(0)' }
+      ],
+      { duration: 300 }
+    );
+    setTimeout(() => { balanceInput.style.borderColor = ''; }, 1500);
+    return;
+  }
+
+  const settings = {
+    theme: 'dark',
+    initialBalance: balance,
+    currentBalance: balance,
+    firstRun: false,
+    currency: 'USD'
+  };
+  saveSettings(settings);
+  saveTrades([]);
+
+  document.getElementById('journal-welcome').classList.add('hidden');
+  document.getElementById('journal-content').classList.remove('hidden');
+
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('entry-date').value = now.toISOString().slice(0, 16);
+
+  renderAll();
+});
+
+/* =====================================================
+   📊 محاسبات
+   ===================================================== */
+function calcStats() {
+  const settings = getSettings() || { initialBalance: 1000 };
+  const completeTrades = getCompleteTrades();
+  const totalPnl = completeTrades.reduce((s, t) => s + Number(t.pnl), 0);
+  const currentBalance = settings.initialBalance + totalPnl;
+  const wins = completeTrades.filter(t => Number(t.pnl) > 0).length;
+  let winrate = completeTrades.length ? Math.round((wins / completeTrades.length) * 100) : 0;
+  if (isNaN(winrate)) winrate = 0;
+
+  return {
+    completeTrades,
+    totalPnl,
+    currentBalance,
+    winrate,
+    initialBalance: settings.initialBalance,
+    completeCount: completeTrades.length
+  };
+}
+
+function renderStats() {
+  const s = calcStats();
+  document.getElementById('stat-balance').textContent = '$' + s.currentBalance.toFixed(2);
+  const pnlEl = document.getElementById('stat-total-pnl');
+  pnlEl.textContent = (s.totalPnl >= 0 ? '+' : '') + '$' + s.totalPnl.toFixed(2);
+  pnlEl.className = s.totalPnl >= 0 ? 'profit' : 'loss';
+  document.getElementById('stat-winrate').textContent = s.winrate + '%';
+  document.getElementById('stat-count').textContent = s.completeCount;
+}
+
+/* =====================================================
+   📋 جدول
+   ===================================================== */
+function renderTable() {
+  const allTrades = getTrades();
+  const tbody = document.getElementById('trades-body');
+
+  if (!allTrades.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-msg">هنوز معامله‌ای ثبت نشده 📭</td></tr>';
+    return;
+  }
+
+  const settings = getSettings() || { initialBalance: 1000 };
+  const sorted = [...allTrades].reverse();
+
+  let running = settings.initialBalance;
+  const balancesMap = {};
+  allTrades.forEach(t => {
+    if (isTradeComplete(t)) running += Number(t.pnl);
+    balancesMap[t.id] = running;
+  });
+
+  tbody.innerHTML = sorted.map(t => {
+    const complete = isTradeComplete(t);
+    const rowClass = complete ? '' : 'incomplete-row';
+    const pnl = Number(t.pnl);
+    const hasPnl = t.pnl !== null && t.pnl !== undefined && t.pnl !== '' && !isNaN(pnl);
+    const pnlClass = complete ? (pnl >= 0 ? 'profit' : 'loss') : '';
+    const pnlText = hasPnl ? ((pnl >= 0 ? '+' : '') + '$' + pnl.toFixed(2)) : '—';
+    const dirClass = t.direction === 'buy' ? 'badge-buy' : t.direction === 'sell' ? 'badge-sell' : '';
+    const dirText = t.direction === 'buy' ? 'Buy' : t.direction === 'sell' ? 'Sell' : '—';
+    const bal = balancesMap[t.id] || settings.initialBalance;
+
+    const incompleteTag = complete ? '' : '<span class="badge badge-incomplete">ناقص</span>';
+    const symbolText = t.symbol && t.symbol.trim() ? t.symbol : '—';
+    const lotText = (t.lot !== null && t.lot !== undefined && t.lot !== '') ? t.lot : '—';
+
+    const imgCell = t.image
+      ? `<img src="${t.image}" class="thumb" onclick="event.stopPropagation(); openLightbox('${t.image}')" alt="">`
+      : '<span style="color:var(--text-dim)">—</span>';
+
+    return `
+      <tr class="${rowClass}" onclick="showTradeDetail('${t.id}')" style="cursor:pointer;">
+        <td style="direction:ltr;">${t.date || '—'}</td>
+        <td style="direction:ltr;font-weight:600;">${symbolText} ${incompleteTag}</td>
+        <td>${dirText !== '—' ? `<span class="badge ${dirClass}">${dirText}</span>` : '—'}</td>
+        <td style="direction:ltr;">${lotText}</td>
+        <td class="${pnlClass}">${pnlText}</td>
+        <td style="direction:ltr;">$${bal.toFixed(2)}</td>
+        <td>${imgCell}</td>
+        <td>
+          <button class="action-btn edit" onclick="event.stopPropagation(); openEditModal('${t.id}')">✏️</button>
+          <button class="action-btn delete" onclick="event.stopPropagation(); deleteTrade('${t.id}')">🗑</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function deleteTrade(id) {
+  if (!confirm('این معامله حذف بشه؟')) return;
+  let trades = getTrades();
+  trades = trades.filter(t => t.id !== id);
+  saveTrades(trades);
+  renderAll();
+}
+
+/* =====================================================
+   📈 گراف
+   ===================================================== */
+function renderChart() {
+  const s = calcStats();
+  const svg = document.getElementById('growth-chart');
+  const W = 800, H = 280;
+  const pad = { top: 20, right: 20, bottom: 30, left: 60 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  const points = [{ balance: s.initialBalance, label: 'شروع' }];
+  let running = s.initialBalance;
+  s.completeTrades.forEach((t, i) => {
+    running += Number(t.pnl);
+    points.push({ balance: running, label: '#' + (i + 1) });
+  });
+
+  if (points.length === 1) {
+    svg.innerHTML = `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="var(--text-dim)" font-size="16">هنوز معامله‌ی کاملی نیست 📈</text>`;
+    return;
+  }
+
+  const values = points.map(p => p.balance);
+  const minV = Math.min(...values);
+  const maxV = Math.max(...values);
+  const range = maxV - minV || 1;
+  const yMin = minV - range * 0.1;
+  const yMax = maxV + range * 0.1;
+
+  const xStep = cw / (points.length - 1);
+  const toX = i => pad.left + i * xStep;
+  const toY = v => pad.top + ch - ((v - yMin) / (yMax - yMin)) * ch;
+
+  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${toX(i)} ${toY(p.balance)}`).join(' ');
+  const areaPath = linePath + ` L ${toX(points.length - 1)} ${pad.top + ch} L ${pad.left} ${pad.top + ch} Z`;
+
+  const isProfit = values[values.length - 1] >= values[0];
+  const color1 = isProfit ? '#10b981' : '#ef4444';
+  const color2 = isProfit ? '#06b6d4' : '#f97316';
+
+  const gridLines = [];
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (ch / 4) * i;
+    const val = yMax - ((yMax - yMin) / 4) * i;
+    gridLines.push(`
+      <line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="var(--glass-border)" stroke-width="1" stroke-dasharray="4 4"/>
+      <text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" fill="var(--text-dim)" font-size="11">$${val.toFixed(0)}</text>
+    `);
+  }
+
+  const dots = points.map((p, i) => `
+    <circle cx="${toX(i)}" cy="${toY(p.balance)}" r="4" fill="${color1}" stroke="#0a0e1a" stroke-width="2"/>
+  `).join('');
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${color1}" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="${color1}" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="${color1}"/>
+        <stop offset="100%" stop-color="${color2}"/>
+      </linearGradient>
+    </defs>
+    ${gridLines.join('')}
+    <path d="${areaPath}" fill="url(#areaGrad)"/>
+    <path d="${linePath}" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    ${dots}
+  `;
+}
+
+/* =====================================================
+   🖼 لایت‌باکس
+   ===================================================== */
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.remove('hidden');
+}
+document.getElementById('lightbox').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.add('hidden');
+});
+
+/* =====================================================
+   📄 مودال جزئیات
+   ===================================================== */
+let currentDetailId = null;
+
+function showTradeDetail(id) {
+  const trades = getTrades();
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+
+  currentDetailId = id;
+  const complete = isTradeComplete(t);
+  const pnl = Number(t.pnl);
+  const hasPnl = t.pnl !== null && t.pnl !== undefined && t.pnl !== '' && !isNaN(pnl);
+  const pnlClass = hasPnl ? (pnl >= 0 ? 'profit' : 'loss') : '';
+  const pnlText = hasPnl ? ((pnl >= 0 ? '+' : '') + '$' + pnl.toFixed(2)) : '—';
+  const dirText = t.direction === 'buy' ? 'Buy 🟢' : t.direction === 'sell' ? 'Sell 🔴' : '—';
+
+  const entryDate = t.entryDate ? t.entryDate.replace('T', ' ') : '—';
+  const exitDate = t.exitDate ? t.exitDate.replace('T', ' ') : '—';
+
+  const imgHtml = t.image
+    ? `<div style="margin-top:14px;"><div class="detail-label" style="margin-bottom:8px;">📸 عکس پوزیشن:</div><img src="${t.image}" style="width:100%;border-radius:12px;cursor:zoom-in;" onclick="openLightbox('${t.image}')" alt=""></div>`
+    : '';
+
+  const incompleteBanner = complete
+    ? ''
+    : '<div style="background:rgba(245,158,11,0.15);border:1px solid var(--warning);color:var(--warning);padding:10px;border-radius:10px;margin-bottom:14px;font-size:0.85rem;text-align:center;">⚠️ این معامله ناقصه و توی آمار حساب نمی‌شه.</div>';
+
+  document.getElementById('detail-title').textContent = `📄 ${t.symbol || 'معامله'}`;
+  document.getElementById('detail-content').innerHTML = `
+    ${incompleteBanner}
+    <div class="detail-row"><span class="detail-label">نماد</span><span class="detail-value">${t.symbol || '—'}</span></div>
+    <div class="detail-row"><span class="detail-label">جهت</span><span class="detail-value">${dirText}</span></div>
+    <div class="detail-row"><span class="detail-label">ورود</span><span class="detail-value">${entryDate}</span></div>
+    <div class="detail-row"><span class="detail-label">خروج</span><span class="detail-value">${exitDate}</span></div>
+    <div class="detail-row"><span class="detail-label">لاتیج</span><span class="detail-value">${(t.lot !== null && t.lot !== undefined && t.lot !== '') ? t.lot : '—'}</span></div>
+    <div class="detail-row"><span class="detail-label">سود / ضرر</span><span class="detail-value ${pnlClass}">${pnlText}</span></div>
+    <div class="detail-row"><span class="detail-label">دلیل ورود</span><span class="detail-value rtl-text">${t.entryReason || '—'}</span></div>
+    <div class="detail-row"><span class="detail-label">دلیل خروج</span><span class="detail-value rtl-text">${t.exitReason || '—'}</span></div>
+    <div class="detail-row"><span class="detail-label">یادداشت</span><span class="detail-value rtl-text">${t.note || '—'}</span></div>
+    ${imgHtml}
+  `;
+  document.getElementById('trade-detail-modal').classList.remove('hidden');
+}
+
+document.getElementById('close-detail-btn').addEventListener('click', () => {
+  document.getElementById('trade-detail-modal').classList.add('hidden');
+});
+
+document.getElementById('trade-detail-modal').addEventListener('click', () => {
+  document.getElementById('trade-detail-modal').classList.add('hidden');
+});
+
+document.getElementById('edit-trade-btn').addEventListener('click', () => {
+  document.getElementById('trade-detail-modal').classList.add('hidden');
+  openEditModal(currentDetailId);
+});
+
+/* =====================================================
+   ✏️ ویرایش
+   ===================================================== */
+let editingId = null;
+let editingNewImage = null;
+let editingRemoveImage = false;
+
+function openEditModal(id) {
+  const trades = getTrades();
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+
+  editingId = id;
+  editingNewImage = null;
+  editingRemoveImage = false;
+
+  document.getElementById('edit-symbol').value = t.symbol || '';
+  document.getElementById('edit-direction').value = t.direction || '';
+  document.getElementById('edit-entry-date').value = t.entryDate || '';
+  document.getElementById('edit-exit-date').value = t.exitDate || '';
+  document.getElementById('edit-lot').value = (t.lot !== null && t.lot !== undefined && t.lot !== '') ? t.lot : '';
+  document.getElementById('edit-pnl').value = (t.pnl !== null && t.pnl !== undefined && t.pnl !== '') ? t.pnl : '';
+  document.getElementById('edit-entry-reason').value = t.entryReason || '';
+  document.getElementById('edit-exit-reason').value = t.exitReason || '';
+  document.getElementById('edit-note').value = t.note || '';
+
+  const preview = document.getElementById('edit-image-preview');
+  const removeBtn = document.getElementById('remove-image-btn');
+  if (t.image) {
+    preview.innerHTML = `<img src="${t.image}" alt="preview">`;
+    removeBtn.style.display = 'block';
+  } else {
+    preview.innerHTML = '';
+    removeBtn.style.display = 'none';
+  }
+
+  document.getElementById('edit-modal').classList.remove('hidden');
+}
+
+document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+  document.getElementById('edit-modal').classList.add('hidden');
+  editingId = null;
+});
+
+document.getElementById('edit-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'edit-modal') {
+    document.getElementById('edit-modal').classList.add('hidden');
+    editingId = null;
+  }
+});
+
+document.getElementById('remove-image-btn').addEventListener('click', () => {
+  editingNewImage = null;
+  editingRemoveImage = true;
+  document.getElementById('edit-image-preview').innerHTML = '';
+  document.getElementById('remove-image-btn').style.display = 'none';
+});
+
+const editDropZone = document.getElementById('edit-drop-zone');
+const editFileInput = document.getElementById('edit-image');
+
+editDropZone.addEventListener('click', () => editFileInput.click());
+editDropZone.addEventListener('dragover', e => { e.preventDefault(); editDropZone.classList.add('dragover'); });
+editDropZone.addEventListener('dragleave', () => editDropZone.classList.remove('dragover'));
+editDropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  editDropZone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) handleEditImage(file);
+});
+editFileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) handleEditImage(file);
+});
+
+function handleEditImage(file) {
+  if (!file.type.startsWith('image/')) { alert('فقط عکس!'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    compressImage(e.target.result, 800, 0.7, dataUrl => {
+      editingNewImage = dataUrl;
+      editingRemoveImage = false;
+      document.getElementById('edit-image-preview').innerHTML = `<img src="${dataUrl}" alt="preview">`;
+      document.getElementById('remove-image-btn').style.display = 'block';
+    });
+  };
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('save-edit-btn').addEventListener('click', () => {
+  if (!editingId) return;
+  const trades = getTrades();
+  const idx = trades.findIndex(t => t.id === editingId);
+  if (idx === -1) return;
+
+  const t = trades[idx];
+  const symbolVal = document.getElementById('edit-symbol').value.trim().toUpperCase();
+  const directionVal = document.getElementById('edit-direction').value;
+  const entryDateVal = document.getElementById('edit-entry-date').value;
+  const exitDateVal = document.getElementById('edit-exit-date').value;
+  const lotVal = document.getElementById('edit-lot').value;
+  const pnlVal = document.getElementById('edit-pnl').value;
+
+  t.symbol = symbolVal;
+  t.direction = directionVal;
+  t.entryDate = entryDateVal;
+  t.exitDate = exitDateVal;
+  t.date = exitDateVal ? exitDateVal.split('T')[0] : (t.date || '');
+  t.lot = lotVal !== '' ? parseFloat(lotVal) : null;
+  t.pnl = pnlVal !== '' ? parseFloat(pnlVal) : null;
+  t.entryReason = document.getElementById('edit-entry-reason').value.trim();
+  t.exitReason = document.getElementById('edit-exit-reason').value.trim();
+  t.note = document.getElementById('edit-note').value.trim();
+
+  if (editingRemoveImage) {
+    t.image = null;
+  } else if (editingNewImage) {
+    t.image = editingNewImage;
+  }
+
+  trades[idx] = t;
+  saveTrades(trades);
+
+  document.getElementById('edit-modal').classList.add('hidden');
+  editingId = null;
+  editingNewImage = null;
+  editingRemoveImage = false;
+
+  renderAll();
+});
+
+/* =====================================================
+   📸 آپلود عکس
+   ===================================================== */
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('position-image');
+const preview = document.getElementById('image-preview');
+let currentImageData = null;
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) handleImage(file);
+});
+fileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) handleImage(file);
+});
+
+function handleImage(file) {
+  if (!file.type.startsWith('image/')) { alert('فقط عکس!'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    compressImage(e.target.result, 800, 0.7, dataUrl => {
+      currentImageData = dataUrl;
+      preview.innerHTML = `<img src="${dataUrl}" alt="preview">`;
+    });
+  };
+  reader.readAsDataURL(file);
+}
+
+function compressImage(dataUrl, maxW, quality, callback) {
+  const img = new Image();
+  img.onload = () => {
+    let w = img.width, h = img.height;
+    if (w > maxW) { h = (h * maxW) / w; w = maxW; }
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    callback(canvas.toDataURL('image/jpeg', quality));
+  };
+  img.src = dataUrl;
+}
+
+/* =====================================================
+   ➕ ثبت معامله
+   ===================================================== */
+document.getElementById('trade-form').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const entryDateVal = document.getElementById('entry-date').value;
+  const exitDateVal = document.getElementById('exit-date').value;
+  const lotVal = document.getElementById('lot').value;
+  const pnlVal = document.getElementById('pnl').value;
+
+  const trade = {
+    id: Date.now().toString(),
+    symbol: document.getElementById('symbol').value.trim().toUpperCase(),
+    direction: document.getElementById('direction').value,
+    entryDate: entryDateVal,
+    exitDate: exitDateVal,
+    date: exitDateVal ? exitDateVal.split('T')[0] : (entryDateVal ? entryDateVal.split('T')[0] : ''),
+    lot: lotVal !== '' ? parseFloat(lotVal) : null,
+    pnl: pnlVal !== '' ? parseFloat(pnlVal) : null,
+    entryReason: document.getElementById('entry-reason').value.trim(),
+    exitReason: document.getElementById('exit-reason').value.trim(),
+    note: document.getElementById('note').value.trim(),
+    image: currentImageData
+  };
+
+  const trades = getTrades();
+  trades.push(trade);
+  saveTrades(trades);
+
+  e.target.reset();
+  currentImageData = null;
+  preview.innerHTML = '';
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('entry-date').value = now.toISOString().slice(0, 16);
+
+  renderAll();
+
+  const btn = e.target.querySelector('.btn-primary');
+  const originalText = btn.textContent;
+  const wasComplete = isTradeComplete(trade);
+  btn.textContent = wasComplete ? '✅ ثبت شد!' : '⚠️ ناقص ثبت شد!';
+  setTimeout(() => { btn.textContent = originalText; }, 1800);
+});
+
+/* =====================================================
+   ⚙️ تنظیمات
+   ===================================================== */
+const settingsModal = document.getElementById('settings-modal');
+
+document.getElementById('menu-settings-btn').addEventListener('click', () => {
+  const s = getSettings();
+  if (s) document.getElementById('settings-balance').value = s.currentBalance.toFixed(2);
+  settingsModal.classList.remove('hidden');
+});
+
+document.getElementById('close-modal-btn').addEventListener('click', () => {
+  settingsModal.classList.add('hidden');
+});
+
+document.getElementById('save-balance-btn').addEventListener('click', () => {
+  const newBal = parseFloat(document.getElementById('settings-balance').value);
+  if (isNaN(newBal) || newBal < 0) { alert('عدد معتبر وارد کن'); return; }
+  const settings = getSettings() || {};
+  const completeTrades = getCompleteTrades();
+  const totalPnl = completeTrades.reduce((s, t) => s + Number(t.pnl), 0);
+  settings.initialBalance = newBal - totalPnl;
+  settings.currentBalance = newBal;
+  saveSettings(settings);
+  renderAll();
+  settingsModal.classList.add('hidden');
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  if (!confirm('همه‌ی داده‌ها پاک بشه؟')) return;
+  if (!confirm('مطمئنی؟')) return;
+  localStorage.removeItem(STORAGE_KEY_SETTINGS);
+  localStorage.removeItem(STORAGE_KEY_TRADES);
+  location.reload();
+});
+
+/* =====================================================
+   📤 اشتراک‌گذاری
+   ===================================================== */
+let shareRange = 'all';
+let shareSize = 'story';
+
+const shareModal = document.getElementById('share-modal');
+const previewModal = document.getElementById('preview-modal');
+
+document.getElementById('share-btn').addEventListener('click', () => {
+  shareModal.classList.remove('hidden');
+});
+
+document.getElementById('close-share-btn').addEventListener('click', () => {
+  shareModal.classList.add('hidden');
+});
+
+document.querySelectorAll('.range-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    shareRange = btn.dataset.range;
+    document.getElementById('custom-range').classList.toggle('hidden', shareRange !== 'custom');
+  });
+});
+
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    shareSize = btn.dataset.size;
+  });
+});
+
+document.getElementById('generate-share-btn').addEventListener('click', () => {
+  const settings = getSettings();
+  let trades = getCompleteTrades();
+
+  if (shareRange === 'custom') {
+    const from = document.getElementById('share-from').value;
+    const to = document.getElementById('share-to').value;
+    if (from) trades = trades.filter(t => t.date >= from);
+    if (to) trades = trades.filter(t => t.date <= to);
+  }
+
+  if (!trades.length) {
+    alert('توی این بازه معامله‌ی کاملی نیست!');
+    return;
+  }
+
+  const totalPnl = trades.reduce((s, t) => s + Number(t.pnl), 0);
+  const wins = trades.filter(t => Number(t.pnl) > 0).length;
+  const winrate = Math.round((wins / trades.length) * 100);
+
+  let startBalance;
+  if (shareRange === 'all') {
+    startBalance = settings.initialBalance;
+  } else {
+    const allComplete = getCompleteTrades();
+    const firstIdx = allComplete.findIndex(t => t.id === trades[0].id);
+    let bal = settings.initialBalance;
+    for (let i = 0; i < firstIdx; i++) {
+      bal += Number(allComplete[i].pnl);
+    }
+    startBalance = bal;
+  }
+  const growthPercent = startBalance > 0 ? ((totalPnl / startBalance) * 100) : 0;
+
+  const points = [startBalance];
+  let running = startBalance;
+  trades.forEach(t => {
+    running += Number(t.pnl);
+    points.push(running);
+  });
+
+  let rangeLabel;
+  if (shareRange === 'all') {
+    rangeLabel = 'ALL TIME';
+  } else {
+    const from = document.getElementById('share-from').value || '...';
+    const to = document.getElementById('share-to').value || '...';
+    rangeLabel = from + ' → ' + to;
+  }
+
+  let cardW, cardH, chartW, chartH;
+  if (shareSize === 'square') {
+    cardW = 480; cardH = 480; chartW = 420; chartH = 180;
+  } else if (shareSize === 'landscape') {
+    cardW = 600; cardH = 400; chartW = 540; chartH = 150;
+  } else {
+    cardW = 400; cardH = 680; chartW = 340; chartH = 240;
+  }
+
+  const chartSvg = buildChartSVG(points, chartW, chartH);
+
+  const cardHtml = `
+    <div class="share-card" style="width:${cardW}px;">
+      <div class="share-card-inner">
+        <div class="share-logo">
+          <span class="djt">DJT</span>
+          <span class="journal">JOURNAL</span>
+        </div>
+
+        <div class="share-divider"></div>
+
+        <div class="share-range-label">${rangeLabel}</div>
+
+        <div class="share-chart">
+          ${chartSvg}
+        </div>
+
+        <div class="share-stats">
+          <div class="share-stat">
+            <div class="share-stat-label">رشد اکانت</div>
+            <div class="share-stat-value ${growthPercent >= 0 ? 'profit' : 'loss'}">${growthPercent >= 0 ? '+' : ''}${growthPercent.toFixed(1)}%</div>
+          </div>
+          <div class="share-stat">
+            <div class="share-stat-label">Win Rate</div>
+            <div class="share-stat-value">${winrate}%</div>
+          </div>
+          <div class="share-stat">
+            <div class="share-stat-label">سود / ضرر</div>
+            <div class="share-stat-value ${totalPnl >= 0 ? 'profit' : 'loss'}">${totalPnl >= 0 ? '+' : ''}$${totalPnl.toFixed(0)}</div>
+          </div>
+        </div>
+
+        <div class="share-footer">
+          <div class="share-social">
+            <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 100 13.2 6.6 6.6 0 000-13.2zm0 10.9a4.3 4.3 0 110-8.6 4.3 4.3 0 010 8.6zm6.9-11.2a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+            <span>dowjones__trading</span>
+          </div>
+          <div class="share-social">
+            <svg viewBox="0 0 24 24"><path d="M21.9 4.3l-3 14.1c-.2 1-.8 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L7.6 12.2 3 10.8c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.1 1.8z"/></svg>
+            <span>dowjones_trading</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('share-card-container').innerHTML = cardHtml;
+  shareModal.classList.add('hidden');
+  previewModal.classList.remove('hidden');
+});
+
+document.getElementById('close-preview-btn').addEventListener('click', () => {
+  previewModal.classList.add('hidden');
+});
+
+document.getElementById('download-share-btn').addEventListener('click', () => {
+  setTimeout(() => { window.print(); }, 200);
+});
+
+function buildChartSVG(points, W, H) {
+  const pad = { top: 10, right: 10, bottom: 10, left: 10 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  const minV = Math.min(...points);
+  const maxV = Math.max(...points);
+  const range = maxV - minV || 1;
+  const yMin = minV - range * 0.15;
+  const yMax = maxV + range * 0.15;
+
+  const xStep = points.length > 1 ? cw / (points.length - 1) : 0;
+  const toX = i => pad.left + i * xStep;
+  const toY = v => pad.top + ch - ((v - yMin) / (yMax - yMin)) * ch;
+
+  const linePath = points.map((v, i) => `${i === 0 ? 'M' : 'L'} ${toX(i)} ${toY(v)}`).join(' ');
+  const areaPath = linePath + ` L ${toX(points.length - 1)} ${pad.top + ch} L ${pad.left} ${pad.top + ch} Z`;
+
+  const isProfit = points[points.length - 1] >= points[0];
+  const color = isProfit ? '#4ade80' : '#f87171';
+
+  const dots = points.map((v, i) => `
+    <circle cx="${toX(i)}" cy="${toY(v)}" r="3" fill="#d4af37" stroke="#0a0a0a" stroke-width="1.5"/>
+  `).join('');
+
+  return `
+    <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+      <defs>
+        <linearGradient id="cardAreaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${color}" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="cardLineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#d4af37"/>
+          <stop offset="100%" stop-color="${color}"/>
+        </linearGradient>
+      </defs>
+      <path d="${areaPath}" fill="url(#cardAreaGrad)"/>
+      <path d="${linePath}" fill="none" stroke="url(#cardLineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      ${dots}
+    </svg>
+  `;
+}
+
+/* =====================================================
+   🧑‍🏫 فرم منتور
+   ===================================================== */
+document.getElementById('mentor-form').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const name = document.getElementById('mentor-name').value.trim();
+  const telegram = document.getElementById('mentor-telegram').value.trim();
+  const phone = document.getElementById('mentor-phone').value.trim();
+  const exp = document.getElementById('mentor-experience').value.trim();
+  const about = document.getElementById('mentor-about').value.trim();
+
+  if (tg && tg.sendData) {
+    try {
+      tg.sendData(JSON.stringify({
+        type: 'mentor_request',
+        name, telegram, phone, experience: exp, about
+      }));
+    } catch (err) {
+      console.warn('sendData failed', err);
+    }
+  }
+
+  document.getElementById('mentor-success').classList.remove('hidden');
+  document.getElementById('mentor-form').reset();
+
+  setTimeout(() => {
+    document.getElementById('mentor-success').classList.add('hidden');
+    goBack();
+  }, 2500);
+});
+
+/* =====================================================
+   🔄 رندر کلی
+   ===================================================== */
+function renderAll() {
+  renderStats();
+  renderTable();
+  renderChart();
+}
+</script>
+
+</body>
+</html>
