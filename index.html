@@ -31,6 +31,7 @@
   --profit: #10b981;
   --loss: #ef4444;
   --warning: #f59e0b;
+  --gold: #d4af37;
 }
 
 [data-theme="light"] {
@@ -941,28 +942,206 @@ tr.incomplete-row { opacity: 0.65; }
 }
 
 /* =====================================================
-   🎥 آموزش‌ها
+   🎥 آموزش‌ها — کارت‌های ویدیو
    ===================================================== */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
+.video-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s both;
+}
+
+.video-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.08));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-card:active::before { opacity: 1; }
+.video-card:active { transform: scale(0.98); }
+
+.video-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+  overflow: hidden;
+}
+
+.video-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+  opacity: 0.6;
+}
+
+.video-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: white;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.video-text {
+  flex: 1;
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
+
+.video-text h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.video-text p {
+  font-size: 0.78rem;
   color: var(--text-dim);
 }
 
-.empty-state-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-  opacity: 0.5;
+.video-arrow {
+  color: var(--text-dim);
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 1;
 }
 
-.empty-state h3 {
-  font-size: 1.1rem;
+/* کارت ویدیو با دو لینک */
+.video-card-multi {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  animation: fadeIn 0.5s both;
+}
+
+.video-card-multi .video-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+.video-card-multi .video-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.video-btn {
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.15));
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 12px;
   color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.video-btn:hover, .video-btn:active {
+  border-color: #8b5cf6;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.25));
+}
+
+/* =====================================================
+   🧑‍🏫 منتور — دو دکمه
+   ===================================================== */
+.mentor-card {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.mentor-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.mentor-card h3 {
+  font-size: 1.1rem;
   margin-bottom: 8px;
 }
 
-.empty-state p {
+.mentor-card p {
+  color: var(--text-dim);
   font-size: 0.85rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.mentor-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mentor-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.mentor-btn.register {
+  background: linear-gradient(135deg, #0088cc, #229ED9);
+  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
+}
+
+.mentor-btn.support {
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
+  color: #1a1a1a;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+}
+
+.mentor-btn:active {
+  transform: scale(0.98);
+}
+
+.mentor-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 /* تحلیل‌ها */
@@ -1009,23 +1188,6 @@ tr.incomplete-row { opacity: 0.65; }
   width: 20px;
   height: 20px;
   fill: white;
-}
-
-/* فرم منتور */
-.mentor-form textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-.success-message {
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  padding: 14px;
-  border-radius: 12px;
-  text-align: center;
-  margin-bottom: 16px;
-  font-size: 0.9rem;
 }
 
 /* =====================================================
@@ -1200,7 +1362,7 @@ tr.incomplete-row { opacity: 0.65; }
     <button id="theme-toggle" class="icon-btn" title="تغییر تم">🌙</button>
   </div>
 
-  <!-- ✨ صفحه Welcome داخلی ژورنال -->
+  <!-- صفحه Welcome داخلی ژورنال -->
   <div id="journal-welcome" style="max-width:420px;margin:40px auto;">
     <div class="glass-card" style="text-align:center;">
       <h2 style="font-size:1.6rem;font-weight:800;margin-bottom:8px;direction:ltr;">
@@ -1348,11 +1510,9 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 
   <div class="page-content">
-    <div class="glass-card">
-      <div class="empty-state">
-        <div class="empty-state-icon">🎬</div>
-        <h3>به‌زودی...</h3>
-        <p>ویدیوهای آموزشی ترید به‌زودی اینجا قرار می‌گیرن</p>
+    <div class="glass-card" style="padding:14px;">
+      <div id="video-list" style="display:flex;flex-direction:column;gap:12px;">
+        <!-- کارت‌های ویدیو با JS اضافه می‌شن -->
       </div>
     </div>
   </div>
@@ -1387,39 +1547,22 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 
   <div class="page-content">
-    <div class="glass-card">
-      <div id="mentor-success" class="success-message hidden">
-        ✅ ثبت‌نام شما با موفقیت ارسال شد! به‌زودی با شما تماس می‌گیریم.
+    <div class="glass-card mentor-card">
+      <div class="mentor-icon">🧑‍🏫</div>
+      <h3>به تیم DJT بپیوند</h3>
+      <p>اگه تریدر حرفه‌ای هستی و می‌خوای به عنوان منتور با ما همکاری کنی، از طریق دکمه‌های زیر اقدام کن</p>
+
+      <div class="mentor-buttons">
+        <a href="https://t.me/Dowjonestradingbot" target="_blank" rel="noopener" class="mentor-btn register">
+          <svg viewBox="0 0 24 24"><path d="M21.9 4.3l-3 14.1c-.2 1-.8 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L7.6 12.2 3 10.8c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.1 1.8z"/></svg>
+          ثبت‌نام منتور
+        </a>
+
+        <a href="https://t.me/iamwiizard" target="_blank" rel="noopener" class="mentor-btn support">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          پشتیبانی
+        </a>
       </div>
-
-      <form id="mentor-form" class="mentor-form">
-        <div class="input-group">
-          <label for="mentor-name">نام و نام خانوادگی *</label>
-          <input type="text" id="mentor-name" required>
-        </div>
-
-        <div class="input-group">
-          <label for="mentor-telegram">آیدی تلگرام *</label>
-          <input type="text" id="mentor-telegram" placeholder="@username" required style="direction:ltr;text-align:left;">
-        </div>
-
-        <div class="input-group">
-          <label for="mentor-phone">شماره تماس</label>
-          <input type="tel" id="mentor-phone" placeholder="09xxxxxxxxx" style="direction:ltr;text-align:left;">
-        </div>
-
-        <div class="input-group">
-          <label for="mentor-experience">سابقه‌ی ترید (سال)</label>
-          <input type="number" id="mentor-experience" min="0" placeholder="3">
-        </div>
-
-        <div class="input-group">
-          <label for="mentor-about">درباره‌ی خودت و انگیزه‌ات *</label>
-          <textarea id="mentor-about" placeholder="چرا می‌خوای منتور DJT بشی؟" required></textarea>
-        </div>
-
-        <button type="submit" class="btn-primary">📩 ارسال درخواست</button>
-      </form>
     </div>
   </div>
 </section>
@@ -1610,6 +1753,74 @@ try {
 }
 
 /* =====================================================
+   📚 لیست ویدیوهای آموزشی
+   ===================================================== */
+const VIDEOS = [
+  { id: 1, title: 'جلسه ۱ — ساختار مارکت', url: 'https://t.me/dowjones_trading/242' },
+  { id: 2, title: 'جلسه ۲ — نقطه خروج و مشخصه ۱۲۳', url: 'https://t.me/dowjones_trading/258' },
+  { id: 3, title: 'جلسه ۳ — فرکتال و شمارش + نحوه ترید با نود ۱', url: 'https://t.me/dowjones_trading/296' },
+  { id: 4, title: 'جلسه ۳ — تشخیص نود و نحوه پیدا کردن سیمتری', url: 'https://t.me/dowjones_trading/406' },
+  { id: 5, title: 'جلسه ۴ — ستاپ‌ها', url: 'https://t.me/dowjones_trading/551' },
+  { id: 6, title: 'جلسه ۵ — مدیریت ریسک', url: 'https://t.me/dowjones_trading/577' },
+  { id: 7, title: 'جلسه ۶ — گلچین ستاپ‌ها', url: 'https://t.me/dowjones_trading/667' },
+  { id: 8, title: 'جلسه ۷ — تشخیص نود', url: 'https://t.me/dowjones_trading/732' },
+  { id: 9, title: 'جلسه ۸ — پاسخ به سوالات', url: 'https://t.me/dowjones_trading/860' },
+  {
+    id: 10,
+    title: 'جلسه ۹ — بک تست و جمع‌بندی',
+    urls: [
+      { label: 'بخش اول', url: 'https://t.me/dowjones_trading/772' },
+      { label: 'بخش دوم', url: 'https://t.me/dowjones_trading/743' }
+    ]
+  }
+];
+
+function renderVideos() {
+  const container = document.getElementById('video-list');
+  if (!container) return;
+
+  const playIcon = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+
+  container.innerHTML = VIDEOS.map((v, idx) => {
+    if (v.urls) {
+      // دو لینک
+      return `
+        <div class="video-card-multi" style="animation-delay:${idx * 0.05}s;">
+          <div class="video-header">
+            <div class="video-icon">${playIcon}</div>
+            <div class="video-text">
+              <h3>${v.title}</h3>
+              <p>۲ بخش — روی دکمه‌ها بزن</p>
+            </div>
+          </div>
+          <div class="video-buttons">
+            ${v.urls.map(u => `
+              <a href="${u.url}" target="_blank" rel="noopener" class="video-btn">
+                ▶️ ${u.label}
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    } else {
+      // تک لینک
+      return `
+        <a href="${v.url}" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="video-card" style="animation-delay:${idx * 0.05}s;">
+            <div class="video-icon">${playIcon}</div>
+            <div class="video-text">
+              <h3>${v.title}</h3>
+              <p>مشاهده در کانال تلگرام</p>
+            </div>
+            <div class="video-arrow">‹</div>
+          </div>
+        </a>
+      `;
+    }
+  }).join('');
+}
+
+/* =====================================================
    💾 مدیریت داده‌ها
    ===================================================== */
 const STORAGE_KEY_SETTINGS = 'djt_settings';
@@ -1646,6 +1857,8 @@ function getCompleteTrades() {
    🎬 Splash → Welcome
    ===================================================== */
 window.addEventListener('DOMContentLoaded', () => {
+  renderVideos();
+
   if (tgUser) {
     const name = tgUser.first_name || tgUser.username || 'دوست عزیز';
     document.getElementById('user-greeting').textContent = `👋 سلام ${name}`;
@@ -1714,14 +1927,12 @@ if (tg && tg.BackButton) {
 function initJournalPage() {
   let settings = getSettings();
 
-  // اگه کاربر جدید (تنظیمات نداره) → صفحه Welcome ژورنال
   if (!settings || settings.firstRun !== false) {
     document.getElementById('journal-welcome').classList.remove('hidden');
     document.getElementById('journal-content').classList.add('hidden');
     return;
   }
 
-  // کاربر قدیمی → مستقیم محتوا
   document.getElementById('journal-welcome').classList.add('hidden');
   document.getElementById('journal-content').classList.remove('hidden');
 
@@ -1754,7 +1965,7 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 });
 
 /* =====================================================
-   🎯 دکمه شروع ژورنال (موجودی اولیه)
+   🎯 دکمه شروع ژورنال
    ===================================================== */
 document.getElementById('journal-start-btn').addEventListener('click', () => {
   const balanceInput = document.getElementById('journal-initial-balance');
@@ -2450,7 +2661,15 @@ document.getElementById('close-preview-btn').addEventListener('click', () => {
 });
 
 document.getElementById('download-share-btn').addEventListener('click', () => {
-  setTimeout(() => { window.print(); }, 200);
+  // روش امن برای پرینت: یکم صبر کن بعد پرینت
+  setTimeout(() => {
+    if (tg && tg.openLink) {
+      // اگه تلگرام بود، از پرینت معمولی استفاده کن
+      window.print();
+    } else {
+      window.print();
+    }
+  }, 100);
 });
 
 function buildChartSVG(points, W, H) {
@@ -2496,38 +2715,6 @@ function buildChartSVG(points, W, H) {
     </svg>
   `;
 }
-
-/* =====================================================
-   🧑‍🏫 فرم منتور
-   ===================================================== */
-document.getElementById('mentor-form').addEventListener('submit', e => {
-  e.preventDefault();
-
-  const name = document.getElementById('mentor-name').value.trim();
-  const telegram = document.getElementById('mentor-telegram').value.trim();
-  const phone = document.getElementById('mentor-phone').value.trim();
-  const exp = document.getElementById('mentor-experience').value.trim();
-  const about = document.getElementById('mentor-about').value.trim();
-
-  if (tg && tg.sendData) {
-    try {
-      tg.sendData(JSON.stringify({
-        type: 'mentor_request',
-        name, telegram, phone, experience: exp, about
-      }));
-    } catch (err) {
-      console.warn('sendData failed', err);
-    }
-  }
-
-  document.getElementById('mentor-success').classList.remove('hidden');
-  document.getElementById('mentor-form').reset();
-
-  setTimeout(() => {
-    document.getElementById('mentor-success').classList.add('hidden');
-    goBack();
-  }, 2500);
-});
 
 /* =====================================================
    🔄 رندر کلی
