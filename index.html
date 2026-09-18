@@ -87,9 +87,6 @@ body {
   66% { transform: translate(-50px, 50px) scale(0.95); }
 }
 
-/* =====================================================
-   💎 کارت شیشه‌ای
-   ===================================================== */
 .glass-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -101,7 +98,7 @@ body {
 }
 
 /* =====================================================
-   🎬 صفحه Splash
+   🎬 Splash
    ===================================================== */
 .splash-screen {
   position: fixed;
@@ -152,7 +149,7 @@ body {
 }
 
 /* =====================================================
-   👋 صفحه Welcome
+   👋 Welcome
    ===================================================== */
 .welcome-screen {
   min-height: 100vh;
@@ -217,7 +214,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* دکمه‌ها */
 .btn-primary {
   width: 100%;
   padding: 15px;
@@ -286,7 +282,7 @@ body {
 }
 
 /* =====================================================
-   🏠 صفحه اصلی (منو)
+   🏠 منو
    ===================================================== */
 .main-menu {
   min-height: 100vh;
@@ -307,11 +303,6 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.menu-header-logo img {
-  width: 42px;
-  height: 42px;
 }
 
 .menu-header-logo .text {
@@ -370,16 +361,6 @@ body {
   overflow: hidden;
 }
 
-.menu-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.05));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.menu-item:active::before { opacity: 1; }
 .menu-item:active { transform: scale(0.98); }
 
 .menu-item-icon {
@@ -430,7 +411,6 @@ body {
   font-size: 1.3rem;
 }
 
-/* فوتر منو */
 .menu-footer {
   margin-top: 24px;
   padding-top: 20px;
@@ -454,11 +434,6 @@ body {
   text-decoration: none;
   font-size: 0.85rem;
   transition: all 0.3s ease;
-}
-
-.menu-footer a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 .menu-footer svg {
@@ -570,7 +545,7 @@ body {
 }
 
 /* =====================================================
-   📸 Drag & Drop
+   📸 Drop Zone
    ===================================================== */
 .drop-zone {
   border: 2px dashed var(--glass-border);
@@ -709,9 +684,6 @@ tr.incomplete-row { opacity: 0.65; }
   margin-bottom: 16px;
 }
 
-/* =====================================================
-   📄 جزئیات
-   ===================================================== */
 .detail-row {
   display: flex;
   justify-content: space-between;
@@ -760,7 +732,6 @@ tr.incomplete-row { opacity: 0.65; }
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  transition: all 0.3s ease;
 }
 .range-btn.active {
   border-color: #d4af37;
@@ -793,9 +764,6 @@ tr.incomplete-row { opacity: 0.65; }
 }
 .size-icon { font-size: 1.2rem; }
 
-/* =====================================================
-   🖼 کارت اشتراک‌گذاری
-   ===================================================== */
 .share-card-wrapper {
   display: flex;
   justify-content: center;
@@ -809,7 +777,7 @@ tr.incomplete-row { opacity: 0.65; }
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   border: 2px solid #d4af37;
   border-radius: 24px;
-  padding: 36px 26px;
+  padding: 32px 24px;
   color: #f5f5f5;
   position: relative;
   overflow: hidden;
@@ -837,12 +805,12 @@ tr.incomplete-row { opacity: 0.65; }
 
 .share-logo {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   direction: ltr;
 }
 
 .share-logo .djt {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 900;
   letter-spacing: 4px;
   background: linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #d4af37 100%);
@@ -853,7 +821,7 @@ tr.incomplete-row { opacity: 0.65; }
 }
 
 .share-logo .journal {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 300;
   letter-spacing: 8px;
   color: #d4af37;
@@ -864,14 +832,14 @@ tr.incomplete-row { opacity: 0.65; }
 .share-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
-  margin: 16px 0;
+  margin: 14px 0;
 }
 
 .share-range-label {
   text-align: center;
   color: #999;
-  font-size: 0.8rem;
-  margin-bottom: 16px;
+  font-size: 0.75rem;
+  margin-bottom: 14px;
   direction: ltr;
 }
 
@@ -879,8 +847,8 @@ tr.incomplete-row { opacity: 0.65; }
   background: rgba(212, 175, 55, 0.03);
   border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 16px;
-  padding: 14px;
-  margin-bottom: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
 }
 
 .share-chart svg { width: 100%; height: auto; display: block; }
@@ -888,27 +856,27 @@ tr.incomplete-row { opacity: 0.65; }
 .share-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .share-stat {
   text-align: center;
-  padding: 12px 6px;
+  padding: 10px 4px;
   background: rgba(212, 175, 55, 0.06);
   border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .share-stat-label {
   color: #999;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   margin-bottom: 4px;
 }
 
 .share-stat-value {
   color: #d4af37;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   direction: ltr;
 }
@@ -916,33 +884,62 @@ tr.incomplete-row { opacity: 0.65; }
 .share-stat-value.profit { color: #4ade80; }
 .share-stat-value.loss { color: #f87171; }
 
+/* آمار حرفه‌ای روی کارت */
+.share-advanced-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.share-adv-stat {
+  text-align: center;
+  padding: 8px 4px;
+  background: rgba(212, 175, 55, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 8px;
+}
+
+.share-adv-label {
+  color: #888;
+  font-size: 0.6rem;
+  margin-bottom: 3px;
+}
+
+.share-adv-value {
+  color: #d4af37;
+  font-size: 0.85rem;
+  font-weight: 700;
+  direction: ltr;
+}
+
 .share-footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  margin-top: 16px;
-  padding-top: 14px;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .share-social {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   color: #d4af37;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   direction: ltr;
 }
 
 .share-social svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   fill: #d4af37;
 }
 
 /* =====================================================
-   🎥 آموزش‌ها — کارت‌های ویدیو
+   🎥 آموزش‌ها
    ===================================================== */
 .video-card {
   display: flex;
@@ -959,16 +956,6 @@ tr.incomplete-row { opacity: 0.65; }
   animation: fadeIn 0.5s both;
 }
 
-.video-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.08));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.video-card:active::before { opacity: 1; }
 .video-card:active { transform: scale(0.98); }
 
 .video-icon {
@@ -1024,11 +1011,8 @@ tr.incomplete-row { opacity: 0.65; }
 .video-arrow {
   color: var(--text-dim);
   font-size: 1.3rem;
-  position: relative;
-  z-index: 1;
 }
 
-/* کارت ویدیو با دو لینک */
 .video-card-multi {
   display: flex;
   flex-direction: column;
@@ -1071,13 +1055,8 @@ tr.incomplete-row { opacity: 0.65; }
   gap: 6px;
 }
 
-.video-btn:hover, .video-btn:active {
-  border-color: #8b5cf6;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.25));
-}
-
 /* =====================================================
-   🧑‍🏫 منتور — دو دکمه
+   🧑‍🏫 منتور
    ===================================================== */
 .mentor-card {
   text-align: center;
@@ -1134,17 +1113,12 @@ tr.incomplete-row { opacity: 0.65; }
   box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
 }
 
-.mentor-btn:active {
-  transform: scale(0.98);
-}
-
 .mentor-btn svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
 }
 
-/* تحلیل‌ها */
 .analysis-card {
   text-align: center;
   padding: 30px 20px;
@@ -1179,16 +1153,291 @@ tr.incomplete-row { opacity: 0.65; }
   font-weight: 700;
   font-size: 0.95rem;
   box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
-  transition: all 0.3s ease;
 }
-
-.analysis-btn:hover { transform: translateY(-2px); }
 
 .analysis-btn svg {
   width: 20px;
   height: 20px;
   fill: white;
 }
+
+/* =====================================================
+   📊 آمار حرفه‌ای
+   ===================================================== */
+.pro-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.pro-stat {
+  padding: 14px 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.pro-stat-label {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.pro-stat-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  direction: ltr;
+}
+
+.pro-stat-value.profit { color: var(--profit); }
+.pro-stat-value.loss { color: var(--loss); }
+.pro-stat-value.gold { color: var(--gold); }
+
+/* =====================================================
+   🥧 نمودار دایره‌ای Win Rate
+   ===================================================== */
+.donut-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.donut-chart {
+  width: 160px;
+  height: 160px;
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 24px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-dot.win { background: var(--profit); }
+.legend-dot.loss { background: var(--loss); }
+
+/* =====================================================
+   📊 نمودار میله‌ای روزانه
+   ===================================================== */
+.bars-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 180px;
+  padding: 12px 4px;
+  overflow-x: auto;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 40px;
+  flex-shrink: 0;
+}
+
+.bar {
+  width: 32px;
+  border-radius: 6px 6px 0 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.bar.profit { background: linear-gradient(180deg, var(--profit), rgba(16, 185, 129, 0.3)); }
+.bar.loss { background: linear-gradient(180deg, var(--loss), rgba(239, 68, 68, 0.3)); }
+.bar.neutral { background: var(--glass-border); }
+
+.bar-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  direction: ltr;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bar-value {
+  font-size: 0.65rem;
+  font-weight: 700;
+  direction: ltr;
+}
+
+/* =====================================================
+   🔥 Heatmap
+   ===================================================== */
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.heatmap-cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+
+.heatmap-cell:active { transform: scale(0.9); }
+
+.heatmap-cell.level-0 { background: var(--glass-bg); }
+.heatmap-cell.level-1-profit { background: rgba(16, 185, 129, 0.25); }
+.heatmap-cell.level-2-profit { background: rgba(16, 185, 129, 0.45); }
+.heatmap-cell.level-3-profit { background: rgba(16, 185, 129, 0.7); color: white; }
+.heatmap-cell.level-1-loss { background: rgba(239, 68, 68, 0.25); }
+.heatmap-cell.level-2-loss { background: rgba(239, 68, 68, 0.45); }
+.heatmap-cell.level-3-loss { background: rgba(239, 68, 68, 0.7); color: white; }
+
+.heatmap-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* =====================================================
+   🏆 دستاوردها
+   ===================================================== */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.badge-item {
+  padding: 14px 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.badge-item.locked {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.badge-item.unlocked {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(245, 215, 110, 0.05));
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.2);
+}
+
+.badge-item .badge-emoji {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.badge-item .badge-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.badge-item .badge-desc {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  line-height: 1.3;
+}
+
+/* =====================================================
+   📅 تقویم
+   ===================================================== */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.calendar-header button {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.calendar-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  padding: 6px 0;
+  font-weight: 600;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  padding: 2px;
+  transition: all 0.2s ease;
+}
+
+.calendar-day.empty { background: transparent; border-color: transparent; cursor: default; }
+.calendar-day.today { border-color: var(--accent); border-width: 2px; }
+.calendar-day.profit-day { background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4); }
+.calendar-day.loss-day { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); }
+.calendar-day .day-num { font-weight: 700; }
+.calendar-day .day-pnl { font-size: 0.55rem; direction: ltr; margin-top: 1px; }
 
 /* =====================================================
    🛠 کمکی
@@ -1201,19 +1450,20 @@ tr.incomplete-row { opacity: 0.65; }
   .menu-item { padding: 18px 16px; }
   .menu-item-icon { width: 46px; height: 46px; font-size: 1.4rem; }
   .share-stats { grid-template-columns: 1fr; }
+  .donut-wrapper { flex-direction: column; gap: 16px; }
+  .donut-legend { margin-right: 0; flex-direction: row; }
 }
 </style>
 </head>
 <body>
 
-<!-- پس‌زمینه متحرک -->
 <div class="animated-bg">
   <span class="blob blob-1"></span>
   <span class="blob blob-2"></span>
   <span class="blob blob-3"></span>
 </div>
 
-<!-- ==================== صفحه Splash ==================== -->
+<!-- ==================== Splash ==================== -->
 <section id="splash-screen" class="splash-screen">
   <svg class="splash-logo" viewBox="0 0 200 200">
     <defs>
@@ -1236,7 +1486,7 @@ tr.incomplete-row { opacity: 0.65; }
   <div class="splash-sub">Trading Community</div>
 </section>
 
-<!-- ==================== صفحه Welcome ==================== -->
+<!-- ==================== Welcome ==================== -->
 <section id="welcome-screen" class="welcome-screen hidden">
   <div class="glass-card welcome-card">
     <svg class="welcome-logo" viewBox="0 0 200 200">
@@ -1272,7 +1522,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== صفحه اصلی (منو) ==================== -->
+<!-- ==================== منو ==================== -->
 <section id="main-menu" class="main-menu hidden">
   <div class="menu-header">
     <div class="menu-header-logo">
@@ -1353,7 +1603,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== صفحه ژورنال ==================== -->
+<!-- ==================== ژورنال ==================== -->
 <section id="page-journal" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1362,7 +1612,6 @@ tr.incomplete-row { opacity: 0.65; }
     <button id="theme-toggle" class="icon-btn" title="تغییر تم">🌙</button>
   </div>
 
-  <!-- صفحه Welcome داخلی ژورنال -->
   <div id="journal-welcome" style="max-width:420px;margin:40px auto;">
     <div class="glass-card" style="text-align:center;">
       <h2 style="font-size:1.6rem;font-weight:800;margin-bottom:8px;direction:ltr;">
@@ -1383,9 +1632,9 @@ tr.incomplete-row { opacity: 0.65; }
     </div>
   </div>
 
-  <!-- محتوای اصلی ژورنال -->
   <div id="journal-content" class="page-content hidden">
 
+    <!-- خلاصه حساب -->
     <div class="glass-card">
       <h2 class="section-title">📊 خلاصه حساب</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;">
@@ -1408,6 +1657,64 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
+    <!-- آمار حرفه‌ای -->
+    <div class="glass-card">
+      <h2 class="section-title">🎯 آمار حرفه‌ای</h2>
+      <div class="pro-stats-grid">
+        <div class="pro-stat">
+          <div class="pro-stat-label">💼 Profit Factor</div>
+          <div class="pro-stat-value gold" id="pro-profit-factor">0.00</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">📉 Max Drawdown</div>
+          <div class="pro-stat-value loss" id="pro-drawdown">$0</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">✅ میانگین برد</div>
+          <div class="pro-stat-value profit" id="pro-avg-win">$0</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">❌ میانگین باخت</div>
+          <div class="pro-stat-value loss" id="pro-avg-loss">$0</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">🏆 بهترین معامله</div>
+          <div class="pro-stat-value profit" id="pro-best">$0</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">💀 بدترین معامله</div>
+          <div class="pro-stat-value loss" id="pro-worst">$0</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">🔥 بیشترین برد پشت‌سرهم</div>
+          <div class="pro-stat-value gold" id="pro-streak">0</div>
+        </div>
+        <div class="pro-stat">
+          <div class="pro-stat-label">📊 برد / باخت</div>
+          <div class="pro-stat-value gold" id="pro-wl">0 / 0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- نمودار دایره‌ای Win Rate -->
+    <div class="glass-card">
+      <h2 class="section-title">🥧 نسبت برد و باخت</h2>
+      <div class="donut-wrapper">
+        <svg class="donut-chart" viewBox="0 0 200 200" id="donut-chart"></svg>
+        <div class="donut-legend">
+          <div class="legend-item">
+            <span class="legend-dot win"></span>
+            <span>برد: <b id="donut-wins">0</b></span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot loss"></span>
+            <span>باخت: <b id="donut-losses">0</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ثبت معامله -->
     <div class="glass-card">
       <h2 class="section-title">➕ ثبت معامله جدید</h2>
       <form id="trade-form">
@@ -1471,6 +1778,7 @@ tr.incomplete-row { opacity: 0.65; }
       </form>
     </div>
 
+    <!-- جدول -->
     <div class="glass-card">
       <h2 class="section-title">📋 لیست معاملات</h2>
       <div class="table-wrapper">
@@ -1492,6 +1800,7 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
+    <!-- گراف رشد -->
     <div class="glass-card">
       <h2 class="section-title">📈 نمودار رشد <span style="font-size:0.7rem;color:var(--text-dim);font-weight:400;">(معاملات کامل)</span></h2>
       <div class="chart-wrapper">
@@ -1499,10 +1808,39 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
+    <!-- نمودار میله‌ای روزانه -->
+    <div class="glass-card">
+      <h2 class="section-title">📊 سود/ضرر روزانه <span style="font-size:0.7rem;color:var(--text-dim);font-weight:400;">(۷ روز اخیر)</span></h2>
+      <div class="bars-chart" id="bars-chart"></div>
+    </div>
+
+    <!-- Heatmap -->
+    <div class="glass-card">
+      <h2 class="section-title">🔥 Heatmap ماهانه</h2>
+      <div id="heatmap-container"></div>
+    </div>
+
+    <!-- تقویم -->
+    <div class="glass-card">
+      <h2 class="section-title">📅 تقویم سود/ضرر</h2>
+      <div class="calendar-header">
+        <button onclick="changeMonth(-1)">‹</button>
+        <div class="calendar-title" id="calendar-title"></div>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <!-- دستاوردها -->
+    <div class="glass-card">
+      <h2 class="section-title">🏆 دستاوردها</h2>
+      <div class="badges-grid" id="badges-grid"></div>
+    </div>
+
   </div>
 </section>
 
-<!-- ==================== صفحه آموزش‌ها ==================== -->
+<!-- ==================== آموزش‌ها ==================== -->
 <section id="page-education" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1511,14 +1849,12 @@ tr.incomplete-row { opacity: 0.65; }
 
   <div class="page-content">
     <div class="glass-card" style="padding:14px;">
-      <div id="video-list" style="display:flex;flex-direction:column;gap:12px;">
-        <!-- کارت‌های ویدیو با JS اضافه می‌شن -->
-      </div>
+      <div id="video-list" style="display:flex;flex-direction:column;gap:12px;"></div>
     </div>
   </div>
 </section>
 
-<!-- ==================== صفحه تحلیل‌ها ==================== -->
+<!-- ==================== تحلیل‌ها ==================== -->
 <section id="page-analysis" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1539,7 +1875,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== صفحه ثبت‌نام منتور ==================== -->
+<!-- ==================== منتور ==================== -->
 <section id="page-mentor" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1736,7 +2072,7 @@ tr.incomplete-row { opacity: 0.65; }
 
 <script>
 /* =====================================================
-   🚀 راه‌اندازی Telegram WebApp
+   🚀 Telegram WebApp
    ===================================================== */
 let tg = null;
 let tgUser = null;
@@ -1753,7 +2089,7 @@ try {
 }
 
 /* =====================================================
-   📚 لیست ویدیوهای آموزشی
+   📚 لیست ویدیوها
    ===================================================== */
 const VIDEOS = [
   { id: 1, title: 'جلسه ۱ — ساختار مارکت', url: 'https://t.me/dowjones_trading/242' },
@@ -1778,12 +2114,10 @@ const VIDEOS = [
 function renderVideos() {
   const container = document.getElementById('video-list');
   if (!container) return;
-
   const playIcon = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
 
   container.innerHTML = VIDEOS.map((v, idx) => {
     if (v.urls) {
-      // دو لینک
       return `
         <div class="video-card-multi" style="animation-delay:${idx * 0.05}s;">
           <div class="video-header">
@@ -1795,15 +2129,12 @@ function renderVideos() {
           </div>
           <div class="video-buttons">
             ${v.urls.map(u => `
-              <a href="${u.url}" target="_blank" rel="noopener" class="video-btn">
-                ▶️ ${u.label}
-              </a>
+              <a href="${u.url}" target="_blank" rel="noopener" class="video-btn">▶️ ${u.label}</a>
             `).join('')}
           </div>
         </div>
       `;
     } else {
-      // تک لینک
       return `
         <a href="${v.url}" target="_blank" rel="noopener" style="text-decoration:none;">
           <div class="video-card" style="animation-delay:${idx * 0.05}s;">
@@ -1821,7 +2152,7 @@ function renderVideos() {
 }
 
 /* =====================================================
-   💾 مدیریت داده‌ها
+   💾 Storage
    ===================================================== */
 const STORAGE_KEY_SETTINGS = 'djt_settings';
 const STORAGE_KEY_TRADES = 'djt_trades';
@@ -1854,7 +2185,7 @@ function getCompleteTrades() {
 }
 
 /* =====================================================
-   🎬 Splash → Welcome
+   🎬 Startup
    ===================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   renderVideos();
@@ -1877,9 +2208,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }, 2000);
 });
 
-/* =====================================================
-   🎯 دکمه شروع
-   ===================================================== */
 document.getElementById('start-btn').addEventListener('click', () => {
   document.getElementById('welcome-screen').classList.add('hidden');
   document.getElementById('main-menu').classList.remove('hidden');
@@ -1892,7 +2220,6 @@ let currentPage = null;
 
 function openPage(page) {
   document.getElementById('main-menu').classList.add('hidden');
-
   if (page === 'journal') {
     document.getElementById('page-journal').classList.remove('hidden');
     currentPage = 'journal';
@@ -1916,9 +2243,7 @@ function goBack() {
 }
 
 if (tg && tg.BackButton) {
-  tg.BackButton.onClick(() => {
-    if (currentPage) goBack();
-  });
+  tg.BackButton.onClick(() => { if (currentPage) goBack(); });
 }
 
 /* =====================================================
@@ -1964,9 +2289,6 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
   applyTheme(settings.theme);
 });
 
-/* =====================================================
-   🎯 دکمه شروع ژورنال
-   ===================================================== */
 document.getElementById('journal-start-btn').addEventListener('click', () => {
   const balanceInput = document.getElementById('journal-initial-balance');
   const balance = parseFloat(balanceInput.value);
@@ -2016,8 +2338,9 @@ function calcStats() {
   const completeTrades = getCompleteTrades();
   const totalPnl = completeTrades.reduce((s, t) => s + Number(t.pnl), 0);
   const currentBalance = settings.initialBalance + totalPnl;
-  const wins = completeTrades.filter(t => Number(t.pnl) > 0).length;
-  let winrate = completeTrades.length ? Math.round((wins / completeTrades.length) * 100) : 0;
+  const wins = completeTrades.filter(t => Number(t.pnl) > 0);
+  const losses = completeTrades.filter(t => Number(t.pnl) < 0);
+  let winrate = completeTrades.length ? Math.round((wins.length / completeTrades.length) * 100) : 0;
   if (isNaN(winrate)) winrate = 0;
 
   return {
@@ -2026,7 +2349,72 @@ function calcStats() {
     currentBalance,
     winrate,
     initialBalance: settings.initialBalance,
-    completeCount: completeTrades.length
+    completeCount: completeTrades.length,
+    wins,
+    losses
+  };
+}
+
+/* آمار حرفه‌ای */
+function calcProStats() {
+  const stats = calcStats();
+  const trades = stats.completeTrades;
+
+  if (!trades.length) {
+    return {
+      profitFactor: 0,
+      maxDrawdown: 0,
+      avgWin: 0,
+      avgLoss: 0,
+      bestTrade: 0,
+      worstTrade: 0,
+      maxWinStreak: 0,
+      winsCount: 0,
+      lossesCount: 0
+    };
+  }
+
+  const totalWin = stats.wins.reduce((s, t) => s + Number(t.pnl), 0);
+  const totalLoss = Math.abs(stats.losses.reduce((s, t) => s + Number(t.pnl), 0));
+
+  const profitFactor = totalLoss > 0 ? totalWin / totalLoss : (totalWin > 0 ? 999 : 0);
+  const avgWin = stats.wins.length ? totalWin / stats.wins.length : 0;
+  const avgLoss = stats.losses.length ? totalLoss / stats.losses.length : 0;
+  const bestTrade = Math.max(...trades.map(t => Number(t.pnl)));
+  const worstTrade = Math.min(...trades.map(t => Number(t.pnl)));
+
+  // Max Drawdown
+  let peak = stats.initialBalance;
+  let balance = stats.initialBalance;
+  let maxDD = 0;
+  trades.forEach(t => {
+    balance += Number(t.pnl);
+    if (balance > peak) peak = balance;
+    const dd = peak - balance;
+    if (dd > maxDD) maxDD = dd;
+  });
+
+  // Max Win Streak
+  let streak = 0, maxStreak = 0;
+  trades.forEach(t => {
+    if (Number(t.pnl) > 0) {
+      streak++;
+      if (streak > maxStreak) maxStreak = streak;
+    } else {
+      streak = 0;
+    }
+  });
+
+  return {
+    profitFactor,
+    maxDrawdown: maxDD,
+    avgWin,
+    avgLoss,
+    bestTrade,
+    worstTrade,
+    maxWinStreak: maxStreak,
+    winsCount: stats.wins.length,
+    lossesCount: stats.losses.length
   };
 }
 
@@ -2038,6 +2426,58 @@ function renderStats() {
   pnlEl.className = s.totalPnl >= 0 ? 'profit' : 'loss';
   document.getElementById('stat-winrate').textContent = s.winrate + '%';
   document.getElementById('stat-count').textContent = s.completeCount;
+
+  renderProStats();
+}
+
+function renderProStats() {
+  const p = calcProStats();
+
+  document.getElementById('pro-profit-factor').textContent = p.profitFactor.toFixed(2);
+  document.getElementById('pro-drawdown').textContent = '$' + p.maxDrawdown.toFixed(2);
+  document.getElementById('pro-avg-win').textContent = '$' + p.avgWin.toFixed(2);
+  document.getElementById('pro-avg-loss').textContent = '$' + p.avgLoss.toFixed(2);
+  document.getElementById('pro-best').textContent = '$' + p.bestTrade.toFixed(2);
+  document.getElementById('pro-worst').textContent = '$' + p.worstTrade.toFixed(2);
+  document.getElementById('pro-streak').textContent = p.maxWinStreak;
+  document.getElementById('pro-wl').textContent = p.winsCount + ' / ' + p.lossesCount;
+
+  renderDonut(p.winsCount, p.lossesCount);
+}
+
+/* نمودار دایره‌ای */
+function renderDonut(wins, losses) {
+  const svg = document.getElementById('donut-chart');
+  document.getElementById('donut-wins').textContent = wins;
+  document.getElementById('donut-losses').textContent = losses;
+
+  const total = wins + losses;
+  const W = 200, H = 200;
+  const cx = 100, cy = 100, r = 70, sw = 28;
+  const C = 2 * Math.PI * r;
+
+  if (total === 0) {
+    svg.innerHTML = `
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--glass-border)" stroke-width="${sw}"/>
+      <text x="${cx}" y="${cy + 6}" text-anchor="middle" fill="var(--text-dim)" font-size="14" font-family="sans-serif">داده‌ای نیست</text>
+    `;
+    return;
+  }
+
+  const winRatio = wins / total;
+  const winLen = C * winRatio;
+  const lossLen = C - winLen;
+
+  svg.innerHTML = `
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--loss)" stroke-width="${sw}"
+      stroke-dasharray="${lossLen} ${C}"
+      transform="rotate(-90 ${cx} ${cy})"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--profit)" stroke-width="${sw}"
+      stroke-dasharray="${winLen} ${C}"
+      transform="rotate(-90 ${cx} ${cy})"/>
+    <text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="var(--text)" font-size="20" font-weight="800" font-family="sans-serif">${Math.round(winRatio * 100)}%</text>
+    <text x="${cx}" y="${cy + 16}" text-anchor="middle" fill="var(--text-dim)" font-size="11" font-family="sans-serif">Win Rate</text>
+  `;
 }
 
 /* =====================================================
@@ -2108,7 +2548,7 @@ function deleteTrade(id) {
 }
 
 /* =====================================================
-   📈 گراف
+   📈 گراف رشد
    ===================================================== */
 function renderChart() {
   const s = calcStats();
@@ -2181,6 +2621,201 @@ function renderChart() {
 }
 
 /* =====================================================
+   📊 نمودار میله‌ای روزانه
+   ===================================================== */
+function renderBarsChart() {
+  const container = document.getElementById('bars-chart');
+  if (!container) return;
+
+  const trades = getCompleteTrades();
+
+  // 7 روز اخیر
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const dayLabel = ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش'][d.getDay()];
+    const dayPnl = trades
+      .filter(t => t.date === dateStr)
+      .reduce((s, t) => s + Number(t.pnl), 0);
+    days.push({ label: dayLabel, date: dateStr, pnl: dayPnl });
+  }
+
+  const maxAbs = Math.max(...days.map(d => Math.abs(d.pnl)), 1);
+
+  container.innerHTML = days.map(d => {
+    const height = d.pnl === 0 ? 4 : Math.max(8, (Math.abs(d.pnl) / maxAbs) * 130);
+    const cls = d.pnl > 0 ? 'profit' : d.pnl < 0 ? 'loss' : 'neutral';
+    const valueText = d.pnl === 0 ? '—' : (d.pnl > 0 ? '+' : '') + '$' + d.pnl.toFixed(0);
+    const valueColor = d.pnl > 0 ? 'var(--profit)' : d.pnl < 0 ? 'var(--loss)' : 'var(--text-dim)';
+
+    return `
+      <div class="bar-item">
+        <div class="bar-value" style="color:${valueColor};">${valueText}</div>
+        <div class="bar ${cls}" style="height:${height}px;"></div>
+        <div class="bar-label">${d.label}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* =====================================================
+   🔥 Heatmap
+   ===================================================== */
+function renderHeatmap() {
+  const container = document.getElementById('heatmap-container');
+  if (!container) return;
+
+  const trades = getCompleteTrades();
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
+
+  // جمع سود روزانه
+  const dayPnl = {};
+  trades.forEach(t => {
+    if (!t.date) return;
+    const [y, m, d] = t.date.split('-').map(Number);
+    if (y === year && m === month + 1) {
+      dayPnl[d] = (dayPnl[d] || 0) + Number(t.pnl);
+    }
+  });
+
+  const values = Object.values(dayPnl).map(Math.abs);
+  const maxV = values.length ? Math.max(...values) : 1;
+
+  // هدر
+  const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
+  let html = '<div class="heatmap-header">' + weekDays.map(d => `<div>${d}</div>`).join('') + '</div>';
+  html += '<div class="heatmap-grid">';
+
+  // خالی‌های اول
+  for (let i = 0; i < firstDay; i++) {
+    html += '<div></div>';
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const pnl = dayPnl[d] || 0;
+    let levelClass = 'level-0';
+    if (pnl > 0) {
+      const ratio = pnl / maxV;
+      levelClass = ratio < 0.33 ? 'level-1-profit' : ratio < 0.66 ? 'level-2-profit' : 'level-3-profit';
+    } else if (pnl < 0) {
+      const ratio = Math.abs(pnl) / maxV;
+      levelClass = ratio < 0.33 ? 'level-1-loss' : ratio < 0.66 ? 'level-2-loss' : 'level-3-loss';
+    }
+
+    const title = pnl !== 0 ? `$${pnl.toFixed(0)}` : 'بدون معامله';
+    html += `<div class="heatmap-cell ${levelClass}" title="${title}">${d}</div>`;
+  }
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+/* =====================================================
+   📅 تقویم
+   ===================================================== */
+let calendarMonth = new Date().getMonth();
+let calendarYear = new Date().getFullYear();
+
+function renderCalendar() {
+  const title = document.getElementById('calendar-title');
+  const grid = document.getElementById('calendar-grid');
+  if (!title || !grid) return;
+
+  const monthNames = ['ژانویه', 'فوریه', 'مارس', 'آپریل', 'می', 'ژوئن', 'ژوئیه', 'اوت', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر'];
+  title.textContent = monthNames[calendarMonth] + ' ' + calendarYear;
+
+  const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+  const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+  const trades = getCompleteTrades();
+  const dayPnl = {};
+  trades.forEach(t => {
+    if (!t.date) return;
+    const [y, m, d] = t.date.split('-').map(Number);
+    if (y === calendarYear && m === calendarMonth + 1) {
+      dayPnl[d] = (dayPnl[d] || 0) + Number(t.pnl);
+    }
+  });
+
+  const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
+
+  let html = weekDays.map(d => `<div class="calendar-day-header">${d}</div>`).join('');
+
+  for (let i = 0; i < firstDay; i++) {
+    html += '<div class="calendar-day empty"></div>';
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const pnl = dayPnl[d] || 0;
+    let cls = 'calendar-day';
+    if (dateStr === todayStr) cls += ' today';
+    if (pnl > 0) cls += ' profit-day';
+    else if (pnl < 0) cls += ' loss-day';
+
+    const pnlText = pnl !== 0 ? `<div class="day-pnl" style="color:${pnl > 0 ? 'var(--profit)' : 'var(--loss)'}">${pnl > 0 ? '+' : ''}${pnl.toFixed(0)}</div>` : '';
+
+    html += `<div class="${cls}"><div class="day-num">${d}</div>${pnlText}</div>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+function changeMonth(dir) {
+  calendarMonth += dir;
+  if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
+  if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
+  renderCalendar();
+}
+
+/* =====================================================
+   🏆 دستاوردها
+   ===================================================== */
+function renderBadges() {
+  const container = document.getElementById('badges-grid');
+  if (!container) return;
+
+  const p = calcProStats();
+  const s = calcStats();
+
+  const BADGES = [
+    { emoji: '🎯', name: 'اولین قدم', desc: '۱ معامله ثبت کردی', unlocked: s.completeCount >= 1 },
+    { emoji: '📈', name: '۱۰ معامله', desc: '۱۰ معامله ثبت کردی', unlocked: s.completeCount >= 10 },
+    { emoji: '🔥', name: '۵۰ معامله', desc: '۵۰ معامله ثبت کردی', unlocked: s.completeCount >= 50 },
+    { emoji: '⭐', name: '۱۰۰ معامله', desc: '۱۰۰ معامله ثبت کردی', unlocked: s.completeCount >= 100 },
+    { emoji: '🏆', name: '۵ برد پیاپی', desc: '۵ برد پشت‌سرهم', unlocked: p.maxWinStreak >= 5 },
+    { emoji: '💎', name: '۱۰ برد پیاپی', desc: '۱۰ برد پشت‌سرهم', unlocked: p.maxWinStreak >= 10 },
+    { emoji: '🎖', name: 'Win Rate بالا', desc: 'بالای ۷۰٪', unlocked: s.winrate >= 70 },
+    { emoji: '👑', name: 'Win Rate افسانه‌ای', desc: 'بالای ۸۵٪', unlocked: s.winrate >= 85 },
+    { emoji: '💰', name: 'سود $۱۰۰', desc: 'سود کل $۱۰۰', unlocked: s.totalPnl >= 100 },
+    { emoji: '💵', name: 'سود $۵۰۰', desc: 'سود کل $۵۰۰', unlocked: s.totalPnl >= 500 },
+    { emoji: '🤑', name: 'سود $۱۰۰۰', desc: 'سود کل $۱۰۰۰', unlocked: s.totalPnl >= 1000 },
+    { emoji: '⚡', name: 'Profit Factor ۲+', desc: 'PF بالای ۲', unlocked: p.profitFactor >= 2 },
+    { emoji: '🌟', name: 'Profit Factor ۳+', desc: 'PF بالای ۳', unlocked: p.profitFactor >= 3 },
+    { emoji: '🛡', name: 'مدیریت ریسک', desc: 'Drawdown زیر $۱۰۰', unlocked: s.completeCount >= 5 && p.maxDrawdown < 100 },
+    { emoji: '🚀', name: 'رشد ۵۰٪', desc: 'اکانت ۵۰٪ رشد کرد', unlocked: s.initialBalance > 0 && (s.totalPnl / s.initialBalance) >= 0.5 },
+    { emoji: '🏅', name: 'رشد ۱۰۰٪', desc: 'اکانت ۲ برابر شد', unlocked: s.initialBalance > 0 && (s.totalPnl / s.initialBalance) >= 1 }
+  ];
+
+  container.innerHTML = BADGES.map(b => `
+    <div class="badge-item ${b.unlocked ? 'unlocked' : 'locked'}">
+      <span class="badge-emoji">${b.emoji}</span>
+      <div class="badge-name">${b.name}</div>
+      <div class="badge-desc">${b.desc}</div>
+    </div>
+  `).join('');
+}
+
+/* =====================================================
    🖼 لایت‌باکس
    ===================================================== */
 function openLightbox(src) {
@@ -2218,7 +2853,7 @@ function showTradeDetail(id) {
 
   const incompleteBanner = complete
     ? ''
-    : '<div style="background:rgba(245,158,11,0.15);border:1px solid var(--warning);color:var(--warning);padding:10px;border-radius:10px;margin-bottom:14px;font-size:0.85rem;text-align:center;">⚠️ این معامله ناقصه و توی آمار حساب نمی‌شه.</div>';
+    : '<div style="background:rgba(245,158,11,0.15);border:1px solid var(--warning);color:var(--warning);padding:10px;border-radius:10px;margin-bottom:14px;font-size:0.85rem;text-align:center;">⚠️ این معامله ناقصه</div>';
 
   document.getElementById('detail-title').textContent = `📄 ${t.symbol || 'معامله'}`;
   document.getElementById('detail-content').innerHTML = `
@@ -2562,8 +3197,13 @@ document.getElementById('generate-share-btn').addEventListener('click', () => {
   }
 
   const totalPnl = trades.reduce((s, t) => s + Number(t.pnl), 0);
-  const wins = trades.filter(t => Number(t.pnl) > 0).length;
-  const winrate = Math.round((wins / trades.length) * 100);
+  const wins = trades.filter(t => Number(t.pnl) > 0);
+  const losses = trades.filter(t => Number(t.pnl) < 0);
+  const winrate = Math.round((wins.length / trades.length) * 100);
+
+  const totalWin = wins.reduce((s, t) => s + Number(t.pnl), 0);
+  const totalLoss = Math.abs(losses.reduce((s, t) => s + Number(t.pnl), 0));
+  const profitFactor = totalLoss > 0 ? (totalWin / totalLoss) : (totalWin > 0 ? 999 : 0);
 
   let startBalance;
   if (shareRange === 'all') {
@@ -2597,11 +3237,11 @@ document.getElementById('generate-share-btn').addEventListener('click', () => {
 
   let cardW, cardH, chartW, chartH;
   if (shareSize === 'square') {
-    cardW = 480; cardH = 480; chartW = 420; chartH = 180;
+    cardW = 480; cardH = 620; chartW = 420; chartH = 160;
   } else if (shareSize === 'landscape') {
-    cardW = 600; cardH = 400; chartW = 540; chartH = 150;
+    cardW = 600; cardH = 480; chartW = 540; chartH = 130;
   } else {
-    cardW = 400; cardH = 680; chartW = 340; chartH = 240;
+    cardW = 400; cardH = 780; chartW = 340; chartH = 200;
   }
 
   const chartSvg = buildChartSVG(points, chartW, chartH);
@@ -2637,6 +3277,17 @@ document.getElementById('generate-share-btn').addEventListener('click', () => {
           </div>
         </div>
 
+        <div class="share-advanced-stats">
+          <div class="share-adv-stat">
+            <div class="share-adv-label">Profit Factor</div>
+            <div class="share-adv-value">${profitFactor.toFixed(2)}</div>
+          </div>
+          <div class="share-adv-stat">
+            <div class="share-adv-label">تعداد معاملات</div>
+            <div class="share-adv-value">${trades.length}</div>
+          </div>
+        </div>
+
         <div class="share-footer">
           <div class="share-social">
             <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 100 13.2 6.6 6.6 0 000-13.2zm0 10.9a4.3 4.3 0 110-8.6 4.3 4.3 0 010 8.6zm6.9-11.2a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
@@ -2661,15 +3312,7 @@ document.getElementById('close-preview-btn').addEventListener('click', () => {
 });
 
 document.getElementById('download-share-btn').addEventListener('click', () => {
-  // روش امن برای پرینت: یکم صبر کن بعد پرینت
-  setTimeout(() => {
-    if (tg && tg.openLink) {
-      // اگه تلگرام بود، از پرینت معمولی استفاده کن
-      window.print();
-    } else {
-      window.print();
-    }
-  }, 100);
+  setTimeout(() => { window.print(); }, 200);
 });
 
 function buildChartSVG(points, W, H) {
@@ -2723,6 +3366,10 @@ function renderAll() {
   renderStats();
   renderTable();
   renderChart();
+  renderBarsChart();
+  renderHeatmap();
+  renderCalendar();
+  renderBadges();
 }
 </script>
 
