@@ -6,9 +6,6 @@
 <title>DJT</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-/* =====================================================
-   🌐 پایه
-   ===================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -58,9 +55,6 @@ body {
   transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* =====================================================
-   🌊 پس‌زمینه متحرک
-   ===================================================== */
 .animated-bg {
   position: fixed;
   inset: 0;
@@ -97,9 +91,6 @@ body {
   padding: 24px;
 }
 
-/* =====================================================
-   🎬 Splash
-   ===================================================== */
 .splash-screen {
   position: fixed;
   inset: 0;
@@ -148,9 +139,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* =====================================================
-   👋 Welcome
-   ===================================================== */
 .welcome-screen {
   min-height: 100vh;
   display: flex;
@@ -281,9 +269,6 @@ body {
   justify-content: center;
 }
 
-/* =====================================================
-   🏠 منو
-   ===================================================== */
 .main-menu {
   min-height: 100vh;
   padding: 24px;
@@ -441,9 +426,6 @@ body {
   height: 18px;
 }
 
-/* =====================================================
-   📄 صفحه‌های داخلی
-   ===================================================== */
 .page {
   min-height: 100vh;
   padding: 16px;
@@ -498,9 +480,6 @@ body {
   gap: 8px;
 }
 
-/* =====================================================
-   📝 ورودی‌ها
-   ===================================================== */
 .input-group { text-align: right; margin-bottom: 16px; }
 
 .input-group label {
@@ -544,9 +523,6 @@ body {
   gap: 12px;
 }
 
-/* =====================================================
-   📸 Drop Zone
-   ===================================================== */
 .drop-zone {
   border: 2px dashed var(--glass-border);
   border-radius: 14px;
@@ -575,9 +551,6 @@ body {
   border: 2px solid var(--glass-border);
 }
 
-/* =====================================================
-   📊 جدول
-   ===================================================== */
 .table-wrapper { overflow-x: auto; border-radius: 12px; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -649,15 +622,9 @@ tr.incomplete-row { opacity: 0.65; }
   color: var(--danger);
 }
 
-/* =====================================================
-   📈 گراف
-   ===================================================== */
 .chart-wrapper { width: 100%; height: 220px; position: relative; }
 .chart-wrapper svg { width: 100%; height: 100%; }
 
-/* =====================================================
-   🪟 مودال
-   ===================================================== */
 .modal {
   position: fixed;
   inset: 0;
@@ -711,9 +678,6 @@ tr.incomplete-row { opacity: 0.65; }
 }
 .edit-actions button { margin: 0; }
 
-/* =====================================================
-   📤 اشتراک‌گذاری
-   ===================================================== */
 .range-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -884,7 +848,6 @@ tr.incomplete-row { opacity: 0.65; }
 .share-stat-value.profit { color: #4ade80; }
 .share-stat-value.loss { color: #f87171; }
 
-/* آمار حرفه‌ای روی کارت */
 .share-advanced-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -938,9 +901,6 @@ tr.incomplete-row { opacity: 0.65; }
   fill: #d4af37;
 }
 
-/* =====================================================
-   🎥 آموزش‌ها
-   ===================================================== */
 .video-card {
   display: flex;
   align-items: center;
@@ -1055,9 +1015,6 @@ tr.incomplete-row { opacity: 0.65; }
   gap: 6px;
 }
 
-/* =====================================================
-   🧑‍🏫 منتور
-   ===================================================== */
 .mentor-card {
   text-align: center;
   padding: 30px 20px;
@@ -1161,9 +1118,6 @@ tr.incomplete-row { opacity: 0.65; }
   fill: white;
 }
 
-/* =====================================================
-   📊 آمار حرفه‌ای
-   ===================================================== */
 .pro-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1176,7 +1130,6 @@ tr.incomplete-row { opacity: 0.65; }
   border: 1px solid var(--glass-border);
   border-radius: 14px;
   text-align: center;
-  transition: all 0.3s ease;
 }
 
 .pro-stat-label {
@@ -1199,9 +1152,6 @@ tr.incomplete-row { opacity: 0.65; }
 .pro-stat-value.loss { color: var(--loss); }
 .pro-stat-value.gold { color: var(--gold); }
 
-/* =====================================================
-   🥧 نمودار دایره‌ای Win Rate
-   ===================================================== */
 .donut-wrapper {
   display: flex;
   justify-content: center;
@@ -1237,9 +1187,6 @@ tr.incomplete-row { opacity: 0.65; }
 .legend-dot.win { background: var(--profit); }
 .legend-dot.loss { background: var(--loss); }
 
-/* =====================================================
-   📊 نمودار میله‌ای روزانه
-   ===================================================== */
 .bars-chart {
   display: flex;
   align-items: flex-end;
@@ -1262,7 +1209,6 @@ tr.incomplete-row { opacity: 0.65; }
   width: 32px;
   border-radius: 6px 6px 0 0;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .bar.profit { background: linear-gradient(180deg, var(--profit), rgba(16, 185, 129, 0.3)); }
@@ -1283,9 +1229,6 @@ tr.incomplete-row { opacity: 0.65; }
   direction: ltr;
 }
 
-/* =====================================================
-   🔥 Heatmap
-   ===================================================== */
 .heatmap-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1328,9 +1271,6 @@ tr.incomplete-row { opacity: 0.65; }
   font-weight: 600;
 }
 
-/* =====================================================
-   🏆 دستاوردها
-   ===================================================== */
 .badges-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -1377,9 +1317,6 @@ tr.incomplete-row { opacity: 0.65; }
   line-height: 1.3;
 }
 
-/* =====================================================
-   📅 تقویم
-   ===================================================== */
 .calendar-header {
   display: flex;
   align-items: center;
@@ -1439,9 +1376,6 @@ tr.incomplete-row { opacity: 0.65; }
 .calendar-day .day-num { font-weight: 700; }
 .calendar-day .day-pnl { font-size: 0.55rem; direction: ltr; margin-top: 1px; }
 
-/* =====================================================
-   🛠 کمکی
-   ===================================================== */
 .hidden { display: none !important; }
 
 @media (max-width: 600px) {
@@ -1463,7 +1397,6 @@ tr.incomplete-row { opacity: 0.65; }
   <span class="blob blob-3"></span>
 </div>
 
-<!-- ==================== Splash ==================== -->
 <section id="splash-screen" class="splash-screen">
   <svg class="splash-logo" viewBox="0 0 200 200">
     <defs>
@@ -1486,7 +1419,6 @@ tr.incomplete-row { opacity: 0.65; }
   <div class="splash-sub">Trading Community</div>
 </section>
 
-<!-- ==================== Welcome ==================== -->
 <section id="welcome-screen" class="welcome-screen hidden">
   <div class="glass-card welcome-card">
     <svg class="welcome-logo" viewBox="0 0 200 200">
@@ -1522,7 +1454,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== منو ==================== -->
 <section id="main-menu" class="main-menu hidden">
   <div class="menu-header">
     <div class="menu-header-logo">
@@ -1603,7 +1534,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== ژورنال ==================== -->
 <section id="page-journal" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1634,7 +1564,6 @@ tr.incomplete-row { opacity: 0.65; }
 
   <div id="journal-content" class="page-content hidden">
 
-    <!-- خلاصه حساب -->
     <div class="glass-card">
       <h2 class="section-title">📊 خلاصه حساب</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;">
@@ -1657,7 +1586,6 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
-    <!-- آمار حرفه‌ای -->
     <div class="glass-card">
       <h2 class="section-title">🎯 آمار حرفه‌ای</h2>
       <div class="pro-stats-grid">
@@ -1696,7 +1624,6 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
-    <!-- نمودار دایره‌ای Win Rate -->
     <div class="glass-card">
       <h2 class="section-title">🥧 نسبت برد و باخت</h2>
       <div class="donut-wrapper">
@@ -1714,7 +1641,6 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
-    <!-- ثبت معامله -->
     <div class="glass-card">
       <h2 class="section-title">➕ ثبت معامله جدید</h2>
       <form id="trade-form">
@@ -1778,7 +1704,6 @@ tr.incomplete-row { opacity: 0.65; }
       </form>
     </div>
 
-    <!-- جدول -->
     <div class="glass-card">
       <h2 class="section-title">📋 لیست معاملات</h2>
       <div class="table-wrapper">
@@ -1800,7 +1725,6 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
-    <!-- گراف رشد -->
     <div class="glass-card">
       <h2 class="section-title">📈 نمودار رشد <span style="font-size:0.7rem;color:var(--text-dim);font-weight:400;">(معاملات کامل)</span></h2>
       <div class="chart-wrapper">
@@ -1808,19 +1732,16 @@ tr.incomplete-row { opacity: 0.65; }
       </div>
     </div>
 
-    <!-- نمودار میله‌ای روزانه -->
     <div class="glass-card">
       <h2 class="section-title">📊 سود/ضرر روزانه <span style="font-size:0.7rem;color:var(--text-dim);font-weight:400;">(۷ روز اخیر)</span></h2>
       <div class="bars-chart" id="bars-chart"></div>
     </div>
 
-    <!-- Heatmap -->
     <div class="glass-card">
       <h2 class="section-title">🔥 Heatmap ماهانه</h2>
       <div id="heatmap-container"></div>
     </div>
 
-    <!-- تقویم -->
     <div class="glass-card">
       <h2 class="section-title">📅 تقویم سود/ضرر</h2>
       <div class="calendar-header">
@@ -1831,7 +1752,6 @@ tr.incomplete-row { opacity: 0.65; }
       <div class="calendar-grid" id="calendar-grid"></div>
     </div>
 
-    <!-- دستاوردها -->
     <div class="glass-card">
       <h2 class="section-title">🏆 دستاوردها</h2>
       <div class="badges-grid" id="badges-grid"></div>
@@ -1840,7 +1760,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== آموزش‌ها ==================== -->
 <section id="page-education" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1854,7 +1773,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== تحلیل‌ها ==================== -->
 <section id="page-analysis" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1875,7 +1793,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== منتور ==================== -->
 <section id="page-mentor" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1903,7 +1820,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
-<!-- ==================== مودال تنظیمات ==================== -->
 <div id="settings-modal" class="modal hidden">
   <div class="glass-card modal-card">
     <h3>⚙️ تنظیمات</h3>
@@ -1919,12 +1835,10 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
-<!-- ==================== لایت‌باکس ==================== -->
 <div id="lightbox" class="modal hidden" style="cursor:zoom-out;">
   <img id="lightbox-img" style="max-width:90%;max-height:90%;border-radius:16px;" alt="">
 </div>
 
-<!-- ==================== مودال جزئیات معامله ==================== -->
 <div id="trade-detail-modal" class="modal hidden">
   <div class="glass-card modal-card" onclick="event.stopPropagation()">
     <h3 id="detail-title" style="margin-bottom:14px;">📄 جزئیات</h3>
@@ -1936,7 +1850,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
-<!-- ==================== مودال ویرایش معامله ==================== -->
 <div id="edit-modal" class="modal hidden">
   <div class="glass-card modal-card" onclick="event.stopPropagation()">
     <h3 style="margin-bottom:14px;">✏️ ویرایش معامله</h3>
@@ -2005,7 +1918,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
-<!-- ==================== مودال اشتراک‌گذاری ==================== -->
 <div id="share-modal" class="modal hidden">
   <div class="glass-card modal-card" style="max-width:460px;" onclick="event.stopPropagation()">
     <h3>📤 اشتراک‌گذاری</h3>
@@ -2058,7 +1970,6 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
-<!-- ==================== مودال پیش‌نمایش ==================== -->
 <div id="preview-modal" class="modal hidden">
   <div class="glass-card modal-card" style="max-width:600px;" onclick="event.stopPropagation()">
     <h3>🖼 پیش‌نمایش کارت</h3>
@@ -2071,9 +1982,6 @@ tr.incomplete-row { opacity: 0.65; }
 </div>
 
 <script>
-/* =====================================================
-   🚀 Telegram WebApp
-   ===================================================== */
 let tg = null;
 let tgUser = null;
 
@@ -2088,9 +1996,6 @@ try {
   console.warn('Telegram WebApp not available', e);
 }
 
-/* =====================================================
-   📚 لیست ویدیوها
-   ===================================================== */
 const VIDEOS = [
   { id: 1, title: 'جلسه ۱ — ساختار مارکت', url: 'https://t.me/dowjones_trading/242' },
   { id: 2, title: 'جلسه ۲ — نقطه خروج و مشخصه ۱۲۳', url: 'https://t.me/dowjones_trading/258' },
@@ -2105,10 +2010,15 @@ const VIDEOS = [
     id: 10,
     title: 'جلسه ۹ — بک تست و جمع‌بندی',
     urls: [
-      { label: 'بخش اول', url: 'https://t.me/dowjones_trading/772' },
-      { label: 'بخش دوم', url: 'https://t.me/dowjones_trading/743' }
+      { label: 'بخش اول', url: 'https://t.me/dowjones_trading/772?single' },
+      { label: 'بخش دوم', url: 'https://t.me/dowjones_trading/743?single' }
     ]
-  }
+  },
+  { id: 11, title: 'جلسه ۱۰ — بک‌تست، سیمتری، مدیریت پوزیشن و روانشناسی', url: 'https://t.me/dowjones_trading/901?single' },
+  { id: 12, title: 'جلسه ۱۱ — فرق نود و نویز', url: 'https://youtu.be/lD6OyOp0JJE?si=eh38KXO7estF8QcI' },
+  { id: 13, title: 'جلسه ۱۲ — تشریح تحلیل‌های کانال + ایندکس', url: 'https://t.me/dowjones_trading/1086' },
+  { id: 14, title: 'جلسه ۱۳ — نودشماری، سیمتری و ورود به معامله', url: 'https://t.me/dowjones_trading/1156' },
+  { id: 15, title: 'جلسه ۱۴ — توضیح کامل جزوه + نکات لایو مارکت', url: 'https://t.me/dowjones_trading/1227' }
 ];
 
 function renderVideos() {
@@ -2151,9 +2061,6 @@ function renderVideos() {
   }).join('');
 }
 
-/* =====================================================
-   💾 Storage
-   ===================================================== */
 const STORAGE_KEY_SETTINGS = 'djt_settings';
 const STORAGE_KEY_TRADES = 'djt_trades';
 
@@ -2184,9 +2091,6 @@ function getCompleteTrades() {
   return getTrades().filter(isTradeComplete);
 }
 
-/* =====================================================
-   🎬 Startup
-   ===================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   renderVideos();
 
@@ -2213,9 +2117,6 @@ document.getElementById('start-btn').addEventListener('click', () => {
   document.getElementById('main-menu').classList.remove('hidden');
 });
 
-/* =====================================================
-   🧭 ناوبری
-   ===================================================== */
 let currentPage = null;
 
 function openPage(page) {
@@ -2246,9 +2147,6 @@ if (tg && tg.BackButton) {
   tg.BackButton.onClick(() => { if (currentPage) goBack(); });
 }
 
-/* =====================================================
-   📓 ژورنال
-   ===================================================== */
 function initJournalPage() {
   let settings = getSettings();
 
@@ -2330,9 +2228,6 @@ document.getElementById('journal-start-btn').addEventListener('click', () => {
   renderAll();
 });
 
-/* =====================================================
-   📊 محاسبات
-   ===================================================== */
 function calcStats() {
   const settings = getSettings() || { initialBalance: 1000 };
   const completeTrades = getCompleteTrades();
@@ -2355,7 +2250,6 @@ function calcStats() {
   };
 }
 
-/* آمار حرفه‌ای */
 function calcProStats() {
   const stats = calcStats();
   const trades = stats.completeTrades;
@@ -2383,7 +2277,6 @@ function calcProStats() {
   const bestTrade = Math.max(...trades.map(t => Number(t.pnl)));
   const worstTrade = Math.min(...trades.map(t => Number(t.pnl)));
 
-  // Max Drawdown
   let peak = stats.initialBalance;
   let balance = stats.initialBalance;
   let maxDD = 0;
@@ -2394,7 +2287,6 @@ function calcProStats() {
     if (dd > maxDD) maxDD = dd;
   });
 
-  // Max Win Streak
   let streak = 0, maxStreak = 0;
   trades.forEach(t => {
     if (Number(t.pnl) > 0) {
@@ -2445,7 +2337,6 @@ function renderProStats() {
   renderDonut(p.winsCount, p.lossesCount);
 }
 
-/* نمودار دایره‌ای */
 function renderDonut(wins, losses) {
   const svg = document.getElementById('donut-chart');
   document.getElementById('donut-wins').textContent = wins;
@@ -2480,9 +2371,6 @@ function renderDonut(wins, losses) {
   `;
 }
 
-/* =====================================================
-   📋 جدول
-   ===================================================== */
 function renderTable() {
   const allTrades = getTrades();
   const tbody = document.getElementById('trades-body');
@@ -2547,9 +2435,6 @@ function deleteTrade(id) {
   renderAll();
 }
 
-/* =====================================================
-   📈 گراف رشد
-   ===================================================== */
 function renderChart() {
   const s = calcStats();
   const svg = document.getElementById('growth-chart');
@@ -2620,16 +2505,12 @@ function renderChart() {
   `;
 }
 
-/* =====================================================
-   📊 نمودار میله‌ای روزانه
-   ===================================================== */
 function renderBarsChart() {
   const container = document.getElementById('bars-chart');
   if (!container) return;
 
   const trades = getCompleteTrades();
 
-  // 7 روز اخیر
   const days = [];
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
@@ -2660,9 +2541,6 @@ function renderBarsChart() {
   }).join('');
 }
 
-/* =====================================================
-   🔥 Heatmap
-   ===================================================== */
 function renderHeatmap() {
   const container = document.getElementById('heatmap-container');
   if (!container) return;
@@ -2675,7 +2553,6 @@ function renderHeatmap() {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDay = new Date(year, month, 1).getDay();
 
-  // جمع سود روزانه
   const dayPnl = {};
   trades.forEach(t => {
     if (!t.date) return;
@@ -2688,12 +2565,10 @@ function renderHeatmap() {
   const values = Object.values(dayPnl).map(Math.abs);
   const maxV = values.length ? Math.max(...values) : 1;
 
-  // هدر
   const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
   let html = '<div class="heatmap-header">' + weekDays.map(d => `<div>${d}</div>`).join('') + '</div>';
   html += '<div class="heatmap-grid">';
 
-  // خالی‌های اول
   for (let i = 0; i < firstDay; i++) {
     html += '<div></div>';
   }
@@ -2717,9 +2592,6 @@ function renderHeatmap() {
   container.innerHTML = html;
 }
 
-/* =====================================================
-   📅 تقویم
-   ===================================================== */
 let calendarMonth = new Date().getMonth();
 let calendarYear = new Date().getFullYear();
 
@@ -2777,9 +2649,6 @@ function changeMonth(dir) {
   renderCalendar();
 }
 
-/* =====================================================
-   🏆 دستاوردها
-   ===================================================== */
 function renderBadges() {
   const container = document.getElementById('badges-grid');
   if (!container) return;
@@ -2815,9 +2684,6 @@ function renderBadges() {
   `).join('');
 }
 
-/* =====================================================
-   🖼 لایت‌باکس
-   ===================================================== */
 function openLightbox(src) {
   document.getElementById('lightbox-img').src = src;
   document.getElementById('lightbox').classList.remove('hidden');
@@ -2826,9 +2692,6 @@ document.getElementById('lightbox').addEventListener('click', () => {
   document.getElementById('lightbox').classList.add('hidden');
 });
 
-/* =====================================================
-   📄 مودال جزئیات
-   ===================================================== */
 let currentDetailId = null;
 
 function showTradeDetail(id) {
@@ -2885,9 +2748,6 @@ document.getElementById('edit-trade-btn').addEventListener('click', () => {
   openEditModal(currentDetailId);
 });
 
-/* =====================================================
-   ✏️ ویرایش
-   ===================================================== */
 let editingId = null;
 let editingNewImage = null;
 let editingRemoveImage = false;
@@ -3016,9 +2876,6 @@ document.getElementById('save-edit-btn').addEventListener('click', () => {
   renderAll();
 });
 
-/* =====================================================
-   📸 آپلود عکس
-   ===================================================== */
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('position-image');
 const preview = document.getElementById('image-preview');
@@ -3064,9 +2921,6 @@ function compressImage(dataUrl, maxW, quality, callback) {
   img.src = dataUrl;
 }
 
-/* =====================================================
-   ➕ ثبت معامله
-   ===================================================== */
 document.getElementById('trade-form').addEventListener('submit', e => {
   e.preventDefault();
 
@@ -3110,9 +2964,6 @@ document.getElementById('trade-form').addEventListener('submit', e => {
   setTimeout(() => { btn.textContent = originalText; }, 1800);
 });
 
-/* =====================================================
-   ⚙️ تنظیمات
-   ===================================================== */
 const settingsModal = document.getElementById('settings-modal');
 
 document.getElementById('menu-settings-btn').addEventListener('click', () => {
@@ -3146,9 +2997,6 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   location.reload();
 });
 
-/* =====================================================
-   📤 اشتراک‌گذاری
-   ===================================================== */
 let shareRange = 'all';
 let shareSize = 'story';
 
@@ -3359,9 +3207,6 @@ function buildChartSVG(points, W, H) {
   `;
 }
 
-/* =====================================================
-   🔄 رندر کلی
-   ===================================================== */
 function renderAll() {
   renderStats();
   renderTable();
