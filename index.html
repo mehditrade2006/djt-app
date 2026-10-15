@@ -6,6 +6,9 @@
 <title>DJT</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
+/* =====================================================
+   🌐 پایه
+   ===================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -29,22 +32,8 @@
   --loss: #ef4444;
   --warning: #f59e0b;
   --gold: #d4af37;
-}
-
-[data-theme="light"] {
-  --bg-1: #e0e7ff;
-  --bg-2: #f0f9ff;
-  --text: #0f172a;
-  --text-dim: #475569;
-  --glass-bg: rgba(255, 255, 255, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.8);
-  --glass-shadow: 0 8px 32px rgba(100, 116, 139, 0.2);
-  --accent: #059669;
-  --accent-2: #0891b2;
-  --danger: #dc2626;
-  --profit: #059669;
-  --loss: #dc2626;
-  --warning: #d97706;
+  --tg: #0088cc;
+  --yt: #ff0000;
 }
 
 body {
@@ -55,6 +44,9 @@ body {
   transition: background 0.5s ease, color 0.5s ease;
 }
 
+/* =====================================================
+   🌊 پس‌زمینه متحرک
+   ===================================================== */
 .animated-bg {
   position: fixed;
   inset: 0;
@@ -77,10 +69,13 @@ body {
 
 @keyframes float {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(60px, -80px) scale(1.1); }
-  66% { transform: translate(-50px, 50px) scale(0.95); }
+  33%      { transform: translate(60px, -80px) scale(1.1); }
+  66%      { transform: translate(-50px, 50px) scale(0.95); }
 }
 
+/* =====================================================
+   💎 کارت شیشه‌ای
+   ===================================================== */
 .glass-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -91,6 +86,9 @@ body {
   padding: 24px;
 }
 
+/* =====================================================
+   🎬 Splash
+   ===================================================== */
 .splash-screen {
   position: fixed;
   inset: 0;
@@ -139,6 +137,9 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* =====================================================
+   👋 Welcome
+   ===================================================== */
 .welcome-screen {
   min-height: 100vh;
   display: flex;
@@ -202,6 +203,9 @@ body {
   margin-bottom: 20px;
 }
 
+/* =====================================================
+   🔘 دکمه‌ها
+   ===================================================== */
 .btn-primary {
   width: 100%;
   padding: 15px;
@@ -269,6 +273,9 @@ body {
   justify-content: center;
 }
 
+/* =====================================================
+   🏠 منو
+   ===================================================== */
 .main-menu {
   min-height: 100vh;
   padding: 24px;
@@ -426,6 +433,9 @@ body {
   height: 18px;
 }
 
+/* =====================================================
+   📄 صفحات داخلی
+   ===================================================== */
 .page {
   min-height: 100vh;
   padding: 16px;
@@ -480,6 +490,134 @@ body {
   gap: 8px;
 }
 
+/* =====================================================
+   🎥 کارت ویدیو (جدید)
+   ===================================================== */
+.video-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.5s both;
+}
+
+.video-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.video-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+
+.video-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: white;
+}
+
+.video-title {
+  flex: 1;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.video-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.video-btn {
+  padding: 12px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.video-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+.video-btn.telegram {
+  background: linear-gradient(135deg, #0088cc, #229ED9);
+  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.4);
+}
+
+.video-btn.youtube {
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+}
+
+.video-btn.disabled {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dim);
+  opacity: 0.4;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.video-btn.disabled svg {
+  fill: var(--text-dim);
+}
+
+.video-btn:active {
+  transform: scale(0.97);
+}
+
+/* دکمه‌های دو بخشی جلسه ۹ */
+.video-parts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.video-part-btn {
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0088cc, #229ED9);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+}
+
+.video-part-btn:active { transform: scale(0.97); }
+
+/* =====================================================
+   📝 ورودی‌ها
+   ===================================================== */
 .input-group { text-align: right; margin-bottom: 16px; }
 
 .input-group label {
@@ -523,6 +661,9 @@ body {
   gap: 12px;
 }
 
+/* =====================================================
+   📸 Drop Zone
+   ===================================================== */
 .drop-zone {
   border: 2px dashed var(--glass-border);
   border-radius: 14px;
@@ -531,7 +672,7 @@ body {
   cursor: pointer;
   background: var(--glass-bg);
 }
-.drop-zone:active, .drop-zone.dragover {
+.drop-zone.dragover {
   border-color: var(--accent);
   background: rgba(16, 185, 129, 0.08);
 }
@@ -551,6 +692,9 @@ body {
   border: 2px solid var(--glass-border);
 }
 
+/* =====================================================
+   📊 جدول
+   ===================================================== */
 .table-wrapper { overflow-x: auto; border-radius: 12px; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -622,9 +766,15 @@ tr.incomplete-row { opacity: 0.65; }
   color: var(--danger);
 }
 
+/* =====================================================
+   📈 گراف
+   ===================================================== */
 .chart-wrapper { width: 100%; height: 220px; position: relative; }
 .chart-wrapper svg { width: 100%; height: 100%; }
 
+/* =====================================================
+   🪟 مودال
+   ===================================================== */
 .modal {
   position: fixed;
   inset: 0;
@@ -678,6 +828,9 @@ tr.incomplete-row { opacity: 0.65; }
 }
 .edit-actions button { margin: 0; }
 
+/* =====================================================
+   📤 اشتراک‌گذاری
+   ===================================================== */
 .range-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -698,7 +851,7 @@ tr.incomplete-row { opacity: 0.65; }
   gap: 6px;
 }
 .range-btn.active {
-  border-color: #d4af37;
+  border-color: var(--gold);
   background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(245,215,110,0.1));
 }
 .range-icon { font-size: 1.4rem; }
@@ -723,7 +876,7 @@ tr.incomplete-row { opacity: 0.65; }
   gap: 4px;
 }
 .size-btn.active {
-  border-color: #d4af37;
+  border-color: var(--gold);
   background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(245,215,110,0.1));
 }
 .size-icon { font-size: 1.2rem; }
@@ -901,223 +1054,9 @@ tr.incomplete-row { opacity: 0.65; }
   fill: #d4af37;
 }
 
-.video-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  animation: fadeIn 0.5s both;
-}
-
-.video-card:active { transform: scale(0.98); }
-
-.video-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-  background: linear-gradient(135deg, #8b5cf6, #ec4899);
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
-  overflow: hidden;
-}
-
-.video-icon::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
-  opacity: 0.6;
-}
-
-.video-icon svg {
-  width: 26px;
-  height: 26px;
-  fill: white;
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-.video-text {
-  flex: 1;
-  text-align: right;
-  position: relative;
-  z-index: 1;
-}
-
-.video-text h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-  color: var(--text);
-}
-
-.video-text p {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-
-.video-arrow {
-  color: var(--text-dim);
-  font-size: 1.3rem;
-}
-
-.video-card-multi {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  animation: fadeIn 0.5s both;
-}
-
-.video-card-multi .video-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 6px;
-}
-
-.video-card-multi .video-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.video-btn {
-  padding: 12px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.15));
-  border: 1px solid rgba(139, 92, 246, 0.4);
-  border-radius: 12px;
-  color: var(--text);
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.mentor-card {
-  text-align: center;
-  padding: 30px 20px;
-}
-
-.mentor-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-}
-
-.mentor-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-}
-
-.mentor-card p {
-  color: var(--text-dim);
-  font-size: 0.85rem;
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-
-.mentor-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mentor-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.mentor-btn.register {
-  background: linear-gradient(135deg, #0088cc, #229ED9);
-  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
-}
-
-.mentor-btn.support {
-  background: linear-gradient(135deg, #d4af37, #f5d76e);
-  color: #1a1a1a;
-  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
-}
-
-.mentor-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-.analysis-card {
-  text-align: center;
-  padding: 30px 20px;
-}
-
-.analysis-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-}
-
-.analysis-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-}
-
-.analysis-card p {
-  color: var(--text-dim);
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.analysis-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  background: linear-gradient(135deg, #0088cc, #229ED9);
-  color: white;
-  text-decoration: none;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
-}
-
-.analysis-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
-}
-
+/* =====================================================
+   📊 آمار حرفه‌ای
+   ===================================================== */
 .pro-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1152,6 +1091,9 @@ tr.incomplete-row { opacity: 0.65; }
 .pro-stat-value.loss { color: var(--loss); }
 .pro-stat-value.gold { color: var(--gold); }
 
+/* =====================================================
+   🥧 نمودار دایره‌ای
+   ===================================================== */
 .donut-wrapper {
   display: flex;
   justify-content: center;
@@ -1159,10 +1101,7 @@ tr.incomplete-row { opacity: 0.65; }
   padding: 16px 0;
 }
 
-.donut-chart {
-  width: 160px;
-  height: 160px;
-}
+.donut-chart { width: 160px; height: 160px; }
 
 .donut-legend {
   display: flex;
@@ -1187,6 +1126,9 @@ tr.incomplete-row { opacity: 0.65; }
 .legend-dot.win { background: var(--profit); }
 .legend-dot.loss { background: var(--loss); }
 
+/* =====================================================
+   📊 نمودار میله‌ای
+   ===================================================== */
 .bars-chart {
   display: flex;
   align-items: flex-end;
@@ -1208,7 +1150,6 @@ tr.incomplete-row { opacity: 0.65; }
 .bar {
   width: 32px;
   border-radius: 6px 6px 0 0;
-  transition: all 0.3s ease;
 }
 
 .bar.profit { background: linear-gradient(180deg, var(--profit), rgba(16, 185, 129, 0.3)); }
@@ -1229,6 +1170,9 @@ tr.incomplete-row { opacity: 0.65; }
   direction: ltr;
 }
 
+/* =====================================================
+   🔥 Heatmap
+   ===================================================== */
 .heatmap-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1243,14 +1187,9 @@ tr.incomplete-row { opacity: 0.65; }
   justify-content: center;
   font-size: 0.65rem;
   color: var(--text);
-  cursor: pointer;
-  transition: all 0.3s ease;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  position: relative;
 }
-
-.heatmap-cell:active { transform: scale(0.9); }
 
 .heatmap-cell.level-0 { background: var(--glass-bg); }
 .heatmap-cell.level-1-profit { background: rgba(16, 185, 129, 0.25); }
@@ -1271,6 +1210,9 @@ tr.incomplete-row { opacity: 0.65; }
   font-weight: 600;
 }
 
+/* =====================================================
+   🏆 دستاوردها
+   ===================================================== */
 .badges-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -1283,14 +1225,9 @@ tr.incomplete-row { opacity: 0.65; }
   border: 1px solid var(--glass-border);
   border-radius: 14px;
   text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
 }
 
-.badge-item.locked {
-  opacity: 0.35;
-  filter: grayscale(1);
-}
+.badge-item.locked { opacity: 0.35; filter: grayscale(1); }
 
 .badge-item.unlocked {
   border-color: var(--gold);
@@ -1317,6 +1254,9 @@ tr.incomplete-row { opacity: 0.65; }
   line-height: 1.3;
 }
 
+/* =====================================================
+   📅 تقویم
+   ===================================================== */
 .calendar-header {
   display: flex;
   align-items: center;
@@ -1364,18 +1304,105 @@ tr.incomplete-row { opacity: 0.65; }
   color: var(--text);
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  cursor: pointer;
   padding: 2px;
-  transition: all 0.2s ease;
 }
 
-.calendar-day.empty { background: transparent; border-color: transparent; cursor: default; }
+.calendar-day.empty { background: transparent; border-color: transparent; }
 .calendar-day.today { border-color: var(--accent); border-width: 2px; }
 .calendar-day.profit-day { background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4); }
 .calendar-day.loss-day { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); }
 .calendar-day .day-num { font-weight: 700; }
 .calendar-day .day-pnl { font-size: 0.55rem; direction: ltr; margin-top: 1px; }
 
+/* =====================================================
+   🧑‍🏫 منتور
+   ===================================================== */
+.mentor-card {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.mentor-icon { font-size: 3rem; margin-bottom: 16px; }
+
+.mentor-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+
+.mentor-card p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.mentor-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mentor-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.mentor-btn.register {
+  background: linear-gradient(135deg, #0088cc, #229ED9);
+  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
+}
+
+.mentor-btn.support {
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
+  color: #1a1a1a;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+}
+
+.mentor-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+.analysis-card {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.analysis-icon { font-size: 3rem; margin-bottom: 16px; }
+
+.analysis-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+
+.analysis-card p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.analysis-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #0088cc, #229ED9);
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
+}
+
+.analysis-btn svg { width: 20px; height: 20px; fill: white; }
+
+/* =====================================================
+   🛠 کمکی
+   ===================================================== */
 .hidden { display: none !important; }
 
 @media (max-width: 600px) {
@@ -1397,6 +1424,7 @@ tr.incomplete-row { opacity: 0.65; }
   <span class="blob blob-3"></span>
 </div>
 
+<!-- ==================== Splash ==================== -->
 <section id="splash-screen" class="splash-screen">
   <svg class="splash-logo" viewBox="0 0 200 200">
     <defs>
@@ -1419,6 +1447,7 @@ tr.incomplete-row { opacity: 0.65; }
   <div class="splash-sub">Trading Community</div>
 </section>
 
+<!-- ==================== Welcome ==================== -->
 <section id="welcome-screen" class="welcome-screen hidden">
   <div class="glass-card welcome-card">
     <svg class="welcome-logo" viewBox="0 0 200 200">
@@ -1454,6 +1483,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
+<!-- ==================== منو ==================== -->
 <section id="main-menu" class="main-menu hidden">
   <div class="menu-header">
     <div class="menu-header-logo">
@@ -1534,6 +1564,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
+<!-- ==================== ژورنال ==================== -->
 <section id="page-journal" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1760,6 +1791,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
+<!-- ==================== آموزش‌ها ==================== -->
 <section id="page-education" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1767,12 +1799,11 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 
   <div class="page-content">
-    <div class="glass-card" style="padding:14px;">
-      <div id="video-list" style="display:flex;flex-direction:column;gap:12px;"></div>
-    </div>
+    <div id="video-list" style="display:flex;flex-direction:column;gap:12px;"></div>
   </div>
 </section>
 
+<!-- ==================== تحلیل‌ها ==================== -->
 <section id="page-analysis" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1793,6 +1824,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
+<!-- ==================== منتور ==================== -->
 <section id="page-mentor" class="page hidden">
   <div class="page-header">
     <button class="back-btn" onclick="goBack()">›</button>
@@ -1820,6 +1852,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </section>
 
+<!-- ==================== مودال تنظیمات ==================== -->
 <div id="settings-modal" class="modal hidden">
   <div class="glass-card modal-card">
     <h3>⚙️ تنظیمات</h3>
@@ -1835,10 +1868,12 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
+<!-- ==================== لایت‌باکس ==================== -->
 <div id="lightbox" class="modal hidden" style="cursor:zoom-out;">
   <img id="lightbox-img" style="max-width:90%;max-height:90%;border-radius:16px;" alt="">
 </div>
 
+<!-- ==================== مودال جزئیات معامله ==================== -->
 <div id="trade-detail-modal" class="modal hidden">
   <div class="glass-card modal-card" onclick="event.stopPropagation()">
     <h3 id="detail-title" style="margin-bottom:14px;">📄 جزئیات</h3>
@@ -1850,6 +1885,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
+<!-- ==================== مودال ویرایش معامله ==================== -->
 <div id="edit-modal" class="modal hidden">
   <div class="glass-card modal-card" onclick="event.stopPropagation()">
     <h3 style="margin-bottom:14px;">✏️ ویرایش معامله</h3>
@@ -1918,6 +1954,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
+<!-- ==================== مودال اشتراک‌گذاری ==================== -->
 <div id="share-modal" class="modal hidden">
   <div class="glass-card modal-card" style="max-width:460px;" onclick="event.stopPropagation()">
     <h3>📤 اشتراک‌گذاری</h3>
@@ -1970,6 +2007,7 @@ tr.incomplete-row { opacity: 0.65; }
   </div>
 </div>
 
+<!-- ==================== مودال پیش‌نمایش ==================== -->
 <div id="preview-modal" class="modal hidden">
   <div class="glass-card modal-card" style="max-width:600px;" onclick="event.stopPropagation()">
     <h3>🖼 پیش‌نمایش کارت</h3>
@@ -1982,6 +2020,9 @@ tr.incomplete-row { opacity: 0.65; }
 </div>
 
 <script>
+/* =====================================================
+   🚀 Telegram WebApp
+   ===================================================== */
 let tg = null;
 let tgUser = null;
 
@@ -1996,71 +2037,185 @@ try {
   console.warn('Telegram WebApp not available', e);
 }
 
+/* =====================================================
+   📚 لیست ویدیوها (جدید — با دو لینک)
+   ===================================================== */
 const VIDEOS = [
-  { id: 1, title: 'جلسه ۱ — ساختار مارکت', url: 'https://t.me/dowjones_trading/242' },
-  { id: 2, title: 'جلسه ۲ — نقطه خروج و مشخصه ۱۲۳', url: 'https://t.me/dowjones_trading/258' },
-  { id: 3, title: 'جلسه ۳ — فرکتال و شمارش + نحوه ترید با نود ۱', url: 'https://t.me/dowjones_trading/296' },
-  { id: 4, title: 'جلسه ۳ — تشخیص نود و نحوه پیدا کردن سیمتری', url: 'https://t.me/dowjones_trading/406' },
-  { id: 5, title: 'جلسه ۴ — ستاپ‌ها', url: 'https://t.me/dowjones_trading/551' },
-  { id: 6, title: 'جلسه ۵ — مدیریت ریسک', url: 'https://t.me/dowjones_trading/577' },
-  { id: 7, title: 'جلسه ۶ — گلچین ستاپ‌ها', url: 'https://t.me/dowjones_trading/667' },
-  { id: 8, title: 'جلسه ۷ — تشخیص نود', url: 'https://t.me/dowjones_trading/732' },
-  { id: 9, title: 'جلسه ۸ — پاسخ به سوالات', url: 'https://t.me/dowjones_trading/860' },
-  {
-    id: 10,
+  { 
+    id: 1, 
+    title: 'جلسه ۱ — ساختار مارکت', 
+    telegram: 'https://t.me/dowjones_trading/242',
+    youtube: 'https://youtu.be/t6cNOFSgPG0?si=_FR8jy0oq5fW3rzm'
+  },
+  { 
+    id: 2, 
+    title: 'جلسه ۲ — نقطه خروج و مشخصه ۱۲۳', 
+    telegram: 'https://t.me/dowjones_trading/258',
+    youtube: ''
+  },
+  { 
+    id: 3, 
+    title: 'جلسه ۳ — فرکتال و شمارش + نحوه ترید با نود ۱', 
+    telegram: 'https://t.me/dowjones_trading/296',
+    youtube: 'https://youtu.be/-TcheumI9nI?si=BCaGcIBpfKT02RwV'
+  },
+  { 
+    id: 4, 
+    title: 'جلسه ۳ — تشخیص نود و نحوه پیدا کردن سیمتری', 
+    telegram: 'https://t.me/dowjones_trading/406',
+    youtube: 'https://youtu.be/vuRnKQu18qc?si=hUaRzC0J5GkMcYFE'
+  },
+  { 
+    id: 5, 
+    title: 'جلسه ۴ — ستاپ‌ها', 
+    telegram: 'https://t.me/dowjones_trading/551',
+    youtube: 'https://youtu.be/bO8HqllGBwQ?si=HgElTeK7eK9Gn49I'
+  },
+  { 
+    id: 6, 
+    title: 'جلسه ۵ — مدیریت ریسک', 
+    telegram: 'https://t.me/dowjones_trading/577',
+    youtube: 'https://youtu.be/9XxLft672RE?si=wOlXx7pxIZ8TGq1r'
+  },
+  { 
+    id: 7, 
+    title: 'جلسه ۶ — گلچین ستاپ‌ها', 
+    telegram: 'https://t.me/dowjones_trading/667',
+    youtube: 'https://youtu.be/it2RPeZEbSE?si=smhdEA1nIAeYtmdb'
+  },
+  { 
+    id: 8, 
+    title: 'جلسه ۷ — تشخیص نود', 
+    telegram: 'https://t.me/dowjones_trading/732',
+    youtube: 'https://youtu.be/3-Iin6AqdIU?si=zamzRDW1XwlKVemk'
+  },
+  { 
+    id: 9, 
+    title: 'جلسه ۸ — پاسخ به سوالات', 
+    telegram: 'https://t.me/dowjones_trading/860',
+    youtube: 'https://youtu.be/Yk67Dipa6T0?si=MIUrKRcWorNhYwyA'
+  },
+  { 
+    id: 10, 
     title: 'جلسه ۹ — بک تست و جمع‌بندی',
-    urls: [
+    telegramParts: [
       { label: 'بخش اول', url: 'https://t.me/dowjones_trading/772?single' },
       { label: 'بخش دوم', url: 'https://t.me/dowjones_trading/743?single' }
-    ]
+    ],
+    youtube: 'https://youtu.be/8GOzgqt3kuE?si=S8mFPb9QbgrytZgV'
   },
-  { id: 11, title: 'جلسه ۱۰ — بک‌تست، سیمتری، مدیریت پوزیشن و روانشناسی', url: 'https://t.me/dowjones_trading/901?single' },
-  { id: 12, title: 'جلسه ۱۱ — فرق نود و نویز', url: 'https://youtu.be/lD6OyOp0JJE?si=eh38KXO7estF8QcI' },
-  { id: 13, title: 'جلسه ۱۲ — تشریح تحلیل‌های کانال + ایندکس', url: 'https://t.me/dowjones_trading/1086' },
-  { id: 14, title: 'جلسه ۱۳ — نودشماری، سیمتری و ورود به معامله', url: 'https://t.me/dowjones_trading/1156' },
-  { id: 15, title: 'جلسه ۱۴ — توضیح کامل جزوه + نکات لایو مارکت', url: 'https://t.me/dowjones_trading/1227' }
+  { 
+    id: 11, 
+    title: 'جلسه ۱۰ — بک‌تست، سیمتری، مدیریت پوزیشن و روانشناسی', 
+    telegram: 'https://t.me/dowjones_trading/901?single',
+    youtube: ''
+  },
+  { 
+    id: 12, 
+    title: 'جلسه ۱۱ — فرق نود و نویز', 
+    telegram: '',
+    youtube: 'https://youtu.be/lD6OyOp0JJE?si=eh38KXO7estF8QcI'
+  },
+  { 
+    id: 13, 
+    title: 'جلسه ۱۲ — تشریح تحلیل‌های کانال + ایندکس', 
+    telegram: 'https://t.me/dowjones_trading/1086',
+    youtube: ''
+  },
+  { 
+    id: 14, 
+    title: 'جلسه ۱۳ — نودشماری، سیمتری و ورود به معامله', 
+    telegram: 'https://t.me/dowjones_trading/1156',
+    youtube: ''
+  },
+  { 
+    id: 15, 
+    title: 'جلسه ۱۴ — توضیح کامل جزوه + نکات لایو مارکت', 
+    telegram: 'https://t.me/dowjones_trading/1227',
+    youtube: 'https://youtu.be/NsTHStFrB20?si=FY89Z50XxDrXLTr8'
+  },
+  { 
+    id: 16, 
+    title: 'جلسه ۱۵ — لایو منتورشیپ', 
+    telegram: 'https://t.me/dowjones_trading/1322',
+    youtube: 'https://youtu.be/ltNY1JSnnW8?si=3_gwyS7pt__v4B46'
+  }
 ];
+
+const TG_ICON = '<svg viewBox="0 0 24 24"><path d="M21.9 4.3l-3 14.1c-.2 1-.8 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L7.6 12.2 3 10.8c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.1 1.8z"/></svg>';
+const YT_ICON = '<svg viewBox="0 0 24 24"><path d="M23.5 6.2c-.3-1-1.1-1.8-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5C1.6 4.4.8 5.2.5 6.2 0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1 1.1 1.8 2.1 2.1 1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5c1-.3 1.8-1.1 2.1-2.1.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>';
+const PLAY_ICON = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
 
 function renderVideos() {
   const container = document.getElementById('video-list');
   if (!container) return;
-  const playIcon = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
 
   container.innerHTML = VIDEOS.map((v, idx) => {
-    if (v.urls) {
-      return `
-        <div class="video-card-multi" style="animation-delay:${idx * 0.05}s;">
-          <div class="video-header">
-            <div class="video-icon">${playIcon}</div>
-            <div class="video-text">
-              <h3>${v.title}</h3>
-              <p>۲ بخش — روی دکمه‌ها بزن</p>
-            </div>
-          </div>
-          <div class="video-buttons">
-            ${v.urls.map(u => `
-              <a href="${u.url}" target="_blank" rel="noopener" class="video-btn">▶️ ${u.label}</a>
-            `).join('')}
-          </div>
+    //--- اگه جلسه دو بخش تلگرام داره
+    const hasParts = v.telegramParts && v.telegramParts.length > 0;
+    
+    //--- دکمه تلگرام
+    let telegramBtn = '';
+    if (hasParts) {
+      telegramBtn = `
+        <div class="video-parts" style="grid-column: span 2;">
+          ${v.telegramParts.map(p => `
+            <a href="${p.url}" target="_blank" rel="noopener" class="video-part-btn">📱 ${p.label}</a>
+          `).join('')}
         </div>
       `;
-    } else {
-      return `
-        <a href="${v.url}" target="_blank" rel="noopener" style="text-decoration:none;">
-          <div class="video-card" style="animation-delay:${idx * 0.05}s;">
-            <div class="video-icon">${playIcon}</div>
-            <div class="video-text">
-              <h3>${v.title}</h3>
-              <p>مشاهده در کانال تلگرام</p>
-            </div>
-            <div class="video-arrow">‹</div>
-          </div>
+    } else if (v.telegram) {
+      telegramBtn = `
+        <a href="${v.telegram}" target="_blank" rel="noopener" class="video-btn telegram">
+          ${TG_ICON}
+          <span>تلگرام</span>
         </a>
       `;
+    } else {
+      telegramBtn = `
+        <div class="video-btn telegram disabled">
+          ${TG_ICON}
+          <span>تلگرام</span>
+        </div>
+      `;
     }
+
+    //--- دکمه یوتیوب
+    let youtubeBtn = '';
+    if (v.youtube) {
+      youtubeBtn = `
+        <a href="${v.youtube}" target="_blank" rel="noopener" class="video-btn youtube">
+          ${YT_ICON}
+          <span>یوتیوب</span>
+        </a>
+      `;
+    } else {
+      youtubeBtn = `
+        <div class="video-btn youtube disabled">
+          ${YT_ICON}
+          <span>یوتیوب</span>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="video-card" style="animation-delay:${idx * 0.05}s;">
+        <div class="video-header">
+          <div class="video-icon">${PLAY_ICON}</div>
+          <div class="video-title">${v.title}</div>
+        </div>
+        <div class="video-buttons">
+          ${telegramBtn}
+          ${youtubeBtn}
+        </div>
+      </div>
+    `;
   }).join('');
 }
 
+/* =====================================================
+   💾 Storage
+   ===================================================== */
 const STORAGE_KEY_SETTINGS = 'djt_settings';
 const STORAGE_KEY_TRADES = 'djt_trades';
 
@@ -2091,6 +2246,9 @@ function getCompleteTrades() {
   return getTrades().filter(isTradeComplete);
 }
 
+/* =====================================================
+   🎬 Startup
+   ===================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   renderVideos();
 
@@ -2117,6 +2275,9 @@ document.getElementById('start-btn').addEventListener('click', () => {
   document.getElementById('main-menu').classList.remove('hidden');
 });
 
+/* =====================================================
+   🧭 ناوبری
+   ===================================================== */
 let currentPage = null;
 
 function openPage(page) {
@@ -2147,6 +2308,9 @@ if (tg && tg.BackButton) {
   tg.BackButton.onClick(() => { if (currentPage) goBack(); });
 }
 
+/* =====================================================
+   📓 ژورنال — Init
+   ===================================================== */
 function initJournalPage() {
   let settings = getSettings();
 
@@ -2228,6 +2392,9 @@ document.getElementById('journal-start-btn').addEventListener('click', () => {
   renderAll();
 });
 
+/* =====================================================
+   📊 محاسبات
+   ===================================================== */
 function calcStats() {
   const settings = getSettings() || { initialBalance: 1000 };
   const completeTrades = getCompleteTrades();
@@ -2256,21 +2423,14 @@ function calcProStats() {
 
   if (!trades.length) {
     return {
-      profitFactor: 0,
-      maxDrawdown: 0,
-      avgWin: 0,
-      avgLoss: 0,
-      bestTrade: 0,
-      worstTrade: 0,
-      maxWinStreak: 0,
-      winsCount: 0,
-      lossesCount: 0
+      profitFactor: 0, maxDrawdown: 0, avgWin: 0, avgLoss: 0,
+      bestTrade: 0, worstTrade: 0, maxWinStreak: 0,
+      winsCount: 0, lossesCount: 0
     };
   }
 
   const totalWin = stats.wins.reduce((s, t) => s + Number(t.pnl), 0);
   const totalLoss = Math.abs(stats.losses.reduce((s, t) => s + Number(t.pnl), 0));
-
   const profitFactor = totalLoss > 0 ? totalWin / totalLoss : (totalWin > 0 ? 999 : 0);
   const avgWin = stats.wins.length ? totalWin / stats.wins.length : 0;
   const avgLoss = stats.losses.length ? totalLoss / stats.losses.length : 0;
@@ -2298,15 +2458,9 @@ function calcProStats() {
   });
 
   return {
-    profitFactor,
-    maxDrawdown: maxDD,
-    avgWin,
-    avgLoss,
-    bestTrade,
-    worstTrade,
-    maxWinStreak: maxStreak,
-    winsCount: stats.wins.length,
-    lossesCount: stats.losses.length
+    profitFactor, maxDrawdown: maxDD, avgWin, avgLoss,
+    bestTrade, worstTrade, maxWinStreak: maxStreak,
+    winsCount: stats.wins.length, lossesCount: stats.losses.length
   };
 }
 
@@ -2316,7 +2470,7 @@ function renderStats() {
   const pnlEl = document.getElementById('stat-total-pnl');
   pnlEl.textContent = (s.totalPnl >= 0 ? '+' : '') + '$' + s.totalPnl.toFixed(2);
   pnlEl.className = s.totalPnl >= 0 ? 'profit' : 'loss';
-  document.getElementById('stat-winrate').textContent = s.winrate + '%';
+  document.getElementById('stat-winrate').textContent = (isNaN(s.winrate) ? 0 : s.winrate) + '%';
   document.getElementById('stat-count').textContent = s.completeCount;
 
   renderProStats();
@@ -2343,7 +2497,6 @@ function renderDonut(wins, losses) {
   document.getElementById('donut-losses').textContent = losses;
 
   const total = wins + losses;
-  const W = 200, H = 200;
   const cx = 100, cy = 100, r = 70, sw = 28;
   const C = 2 * Math.PI * r;
 
